@@ -1,3 +1,4 @@
 {
-    "test": "Test FR"
+    "test": "Test FR",
+    "error.page_not_found": "Page introuvable"
 }

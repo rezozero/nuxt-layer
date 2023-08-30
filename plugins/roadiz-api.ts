@@ -1,20 +1,37 @@
-import {HydraCollection} from "@roadiz/abstract-api-client/dist/types/hydra";
-import {JsonLdObject} from "@roadiz/abstract-api-client/dist/types/jsonld";
 import {FetchOptions, FetchResponse} from "ofetch";
-import {RoadizAlternateLink, RoadizNodesSources} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import {CommonContent} from "~/composables/use-common-contents";
+import {
+    RoadizAlternateLink,
+    RoadizNodesSources,
+    RoadizWebResponse
+} from "@roadiz/abstract-api-client/dist/types/roadiz";
+import {NitroFetchOptions} from "nitropack";
+import {CommonContent, PageResponse} from "~/types/api";
+import {EventsApi} from "~/types/event";
 
-export type ExtendedApiResponse = HydraCollection<JsonLdObject>|JsonLdObject
-export interface ApiFetchResponse<T extends ExtendedApiResponse> {
-    responseItem: T,
-    alternateLinks: Array<RoadizAlternateLink>
+const b64DecodeUnicode = (str: string): string => {
+    if (!process.server) {
+        return decodeURIComponent(
+            Array.prototype.map
+                .call(window.atob(str), function (c: string) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                })
+                .join('')
+        )
+    }
+    return decodeURIComponent(
+        Array.prototype.map
+            .call(Buffer.from(str, 'base64').toString('binary'), function (c: string) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            })
+            .join('')
+    )
 }
 
 const getAlternateLinks = (response: FetchResponse<any>): Array<RoadizAlternateLink> => {
-    if (!response.headers.has('link')) return []
     const links = response.headers.get('link')
-    if (!links) return []
-
+    if (!links) {
+        return []
+    }
     return links.split(',')
         .filter((link: string) => {
             return link
@@ -35,16 +52,6 @@ const getAlternateLinks = (response: FetchResponse<any>): Array<RoadizAlternateL
         })
 }
 
-const b64DecodeUnicode = (str: string): string => {
-    return decodeURIComponent(
-        Array.prototype.map
-            .call(Buffer.from(str, 'base64').toString('binary'), function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-            })
-            .join('')
-    )
-}
-
 const commonHeaders = (opts?: FetchOptions): Record<string, string> => {
     const headers = {
         ...opts?.headers || {
@@ -59,18 +66,23 @@ const commonHeaders = (opts?: FetchOptions): Record<string, string> => {
     return headers
 }
 
-const apiFetch = async<T extends ExtendedApiResponse>(relativePath: string, opts?: FetchOptions): Promise<T> => {
+export const apiFetch = () => {
     const runtimeConfig = useRuntimeConfig()
-    const headers= commonHeaders(opts)
+    const headers= commonHeaders({})
+    const baseURL = runtimeConfig.public.apiBaseUrl
 
-    return await $fetch<T>(
-        `${runtimeConfig.public.apiBaseUrl}${relativePath}`,
-        // @ts-ignore
+    return $fetch.create(
         {
-            ...opts,
-            ...{
-                headers,
-            }
+            async onResponseError({ request, response, options }) {
+                console.debug(
+                    '[apiFetch response error]',
+                    request,
+                    response.status,
+                    response.body
+                )
+            },
+            headers,
+            baseURL
         }
     )
 }
@@ -78,60 +90,55 @@ const apiFetch = async<T extends ExtendedApiResponse>(relativePath: string, opts
 /*
  * Fetch a page from Roadiz API and return its alternate links extracted from response headers.
  */
-const webResponseFetch = async<T extends ExtendedApiResponse>(relativePath: string, opts?: FetchOptions): Promise<ApiFetchResponse<T>> => {
-    const { locale } = useI18n()
-    let alternateLinks: Array<RoadizAlternateLink> = []
-    const responseItem = await apiFetch<T>(
+const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<PageResponse> => {
+    const fetch = apiFetch()
+    const { setLocale } = useI18n()
+
+    const response = await fetch.raw<RoadizWebResponse>(
         relativePath,
-        // @ts-ignore
-        {
-            ...opts,
-            async onResponse({ request, response, options }) {
-                alternateLinks = getAlternateLinks(response)
-                console.log(alternateLinks)
-            }
-        }
+        opts,
     )
+    const alternateLinks = getAlternateLinks(response)
+    const webResponse = response._data
+    const item = webResponse?.item as RoadizNodesSources | EventsApi.Event | undefined
+    const locale = (item as RoadizNodesSources)?.translation?.locale || (item as EventsApi.Event)?.locale || undefined
 
-    console.log('translation', (responseItem as RoadizNodesSources)?.translation)
-    if ((responseItem as RoadizNodesSources)?.translation && (responseItem as RoadizNodesSources).translation?.locale) {
-        const switchLocalePath = useSwitchLocalePath()
-        const newLocale = (responseItem as RoadizNodesSources).translation?.locale
-
-        if (newLocale) {
-            console.log('switchLocalePath', newLocale)
-            /*
-             * Switch i18n locale if locale has changed
-             */
-            switchLocalePath(newLocale)
-
-            /*
-             * Fetch common contents if locale has changed
-             */
-            console.log('useCommonContents', newLocale)
-            if (useCommonContents().value === null || locale.value !== newLocale) {
-                useCommonContents().value = await apiFetch<CommonContent>('/common_content', {
-                    query: {
-                        _locale: (responseItem as RoadizNodesSources)?.translation?.locale
-                    }
-                })
+    if (locale) {
+        await setLocale(locale)
+    }
+    if (!useCommonContents().value && locale) {
+        /*
+         * Fetch common contents if locale has changed
+         */
+        useCommonContents().value = await fetch<CommonContent>('/common_content', {
+            query: {
+                _locale: locale
             }
-        }
+        })
     }
 
-
-
     return {
-        responseItem,
+        webResponse,
         alternateLinks
     }
 }
 
+export default defineNuxtPlugin((nuxtApp) => {
+    // called right after a new locale has been set
+    nuxtApp.hook('i18n:localeSwitched', async ({oldLocale, newLocale}) => {
+        if (oldLocale !== newLocale) {
+            const fetch = apiFetch()
+            useCommonContents().value = await fetch<CommonContent>('/common_content', {
+                query: {
+                    _locale: newLocale
+                }
+            })
+        }
+    })
 
-export default defineNuxtPlugin(() => {
     return {
         provide: {
-            apiFetch,
+            apiFetch: apiFetch(),
             webResponseFetch,
         }
     }

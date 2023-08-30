@@ -1,3 +1,4 @@
 {
-    "test": "Test DE"
+    "test": "Test DE",
+    "error.page_not_found": "Page not found"
 }

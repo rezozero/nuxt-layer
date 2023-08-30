@@ -1,4 +1,13 @@
 <template>
+    <h1><nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link></h1>
+    <p>Locale: {{ locale }}</p>
+    <nav v-if="mainMenuWalker">
+        <ul>
+            <li v-for="subWalker in mainMenuWalker.children">
+                <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
+            </li>
+        </ul>
+    </nav>
     <nav>
         <ul>
             <li v-for="alternateLink in alternateLinks">
@@ -7,23 +16,20 @@
             </li>
         </ul>
     </nav>
-    <h1 v-if="page && page.title">{{ page.title }}</h1>
+    <h1 v-if="title">{{ title }}</h1>
 
-    <p>Type: {{ pageType }}</p>
-    <p>Path: {{ pagePath }}</p>
-    <p>QS: {{ queryString }}</p>
-
-    <NuxtPicture sizes="sm:100vw md:50vw lg:300px"
-                 src="d0d72cea/thumbnail_hcnonm.jpg"
-                 :modifiers="{ crop: '1x1' }"></NuxtPicture>
+    <v-block-factory :blocks="blocks"></v-block-factory>
 </template>
 <script setup lang="ts">
-import {RoadizWebResponse} from "@roadiz/abstract-api-client/dist/types/roadiz";
+import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
 import useWebResponse from "~/composables/use-web-response";
-import {ApiFetchResponse} from "~/plugins/roadiz-api";
+import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
+import {PageResponse} from "~/types/api";
 
 const { $webResponseFetch } = useNuxtApp()
+const { t, locale } = useI18n()
 const route = useRoute()
+
 const pagePath = computed(() => {
     return route.path
 })
@@ -31,13 +37,48 @@ const queryString = computed(() => {
     return route.query
 })
 
-const { data } = await useAsyncData<ApiFetchResponse<RoadizWebResponse>>(async (): Promise<ApiFetchResponse<RoadizWebResponse>> => {
-    return await $webResponseFetch<RoadizWebResponse>('/web_response_by_path', {
+const { data: fetchResponse } = await useAsyncData<PageResponse>(
+    (): Promise<PageResponse> => $webResponseFetch('/web_response_by_path', {
         query: {
             path: pagePath.value,
         }
-    })
+    }),
+    {
+        watch: [queryString]
+    }
+)
+if (!fetchResponse.value) {
+    throw createError({ statusCode: 404, message: t('error.page_not_found').toString(), fatal: true })
+}
+
+const {
+    webResponse,
+    page,
+    title,
+    blocks,
+    alternateLinks,
+    getHeadMeta,
+    getHeadLinks,
+    getHeadScripts
+} = useWebResponse(fetchResponse, useCommonContents())
+
+useHead({
+    htmlAttrs: {
+        lang: locale.value,
+    },
+    title: (page.value as RoadizNodesSources)?.title,
+    meta: getHeadMeta(),
+    link: getHeadLinks(),
+    script: getHeadScripts(),
 })
 
-const { page, pageType, blocks, breadcrumbs, alternateLinks } = useWebResponse(data)
+const homePage = computed(() => {
+    return useCommonContents().value?.home
+})
+const siteName = computed(() => {
+    return useCommonContents().value?.head?.siteName
+})
+const mainMenuWalker = computed(() => {
+    return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
+})
 </script>

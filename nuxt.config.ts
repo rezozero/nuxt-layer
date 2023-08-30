@@ -1,9 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // i18n
 const locales = ['en', 'fr', 'de']
-const defaultTimeZone = 'Europe/Paris' // Define global app timezone here because i18n config is not editable at runtime
 const defaultLocale = 'en'
-const fallbackLocale = 'en'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -15,14 +13,22 @@ export default defineNuxtConfig({
   plugins: [
     './plugins/roadiz-api.ts',
   ],
+  components: [
+    { path: '~/components/blocks/', global: true },
+  ],
   runtimeConfig: {
     public: {
+      baseUrl: 'http://localhost:3000',
       apiBaseUrl: 'http://roadiz-core-app.test/api',
       interventionRequest: {
         baseUrl: 'http://roadiz-core-app.test/assets',
         noProcessBaseUrl: 'http://roadiz-core-app.test/files',
         imagesPath: ''
       },
+      matomo: {
+        url: 'https://matomo.rezo-zero.com',
+        containerId: undefined,
+      }
     }
   },
   // https://github.com/rezozero/intervention-request-provider
@@ -41,6 +47,7 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
+    detectBrowserLanguage: false,
     defaultLocale,
     locales: locales.map((locale) => ({
       code: locale,
