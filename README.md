@@ -5,6 +5,7 @@
 - [x] Roadiz API plugin `$apiFetch` and global *useAsyncData*
 - [x] Block factory
 - [x] Page SEO
+- [x] InterventionRequest nuxt-image provider
 - [x] Sitemap from Roadiz nodes-sources
 - [ ] `VForm` and form elements factory from JSON schema
 - [ ] Storybook integration
