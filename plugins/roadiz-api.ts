@@ -8,6 +8,9 @@ import {NitroFetchOptions} from "nitropack";
 import {CommonContent, PageResponse} from "~/types/api";
 import {EventsApi} from "~/types/event";
 
+/*
+ * Decode base64 string to UTF-8 string on client-side and Node.js
+ */
 const b64DecodeUnicode = (str: string): string => {
     if (!process.server) {
         return decodeURIComponent(
@@ -66,6 +69,9 @@ const commonHeaders = (opts?: FetchOptions): Record<string, string> => {
     return headers
 }
 
+/*
+ * Factory: create a new fetch instance with common headers and base URL.
+ */
 export const apiFetch = () => {
     const runtimeConfig = useRuntimeConfig()
     const headers= commonHeaders({})
@@ -89,6 +95,7 @@ export const apiFetch = () => {
 
 /*
  * Fetch a page from Roadiz API and return its alternate links extracted from response headers.
+ * If common content are not loaded yet, it will fetch them.
  */
 const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<PageResponse> => {
     const fetch = apiFetch()
@@ -128,6 +135,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.hook('i18n:localeSwitched', async ({oldLocale, newLocale}) => {
         if (oldLocale !== newLocale) {
             const fetch = apiFetch()
+            /*
+             * Fetch common contents again if locale has changed
+             */
             useCommonContents().value = await fetch<CommonContent>('/common_content', {
                 query: {
                     _locale: newLocale

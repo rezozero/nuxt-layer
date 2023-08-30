@@ -16,6 +16,28 @@
 - [ ] SCSS configuration
 - [ ] Basic components
 
+## Examples
+
+Theses blocks components are available:
+
+- Basic block: `components/blocks/BasicBlock.vue`
+- Group block: `components/blocks/GroupBlock.vue`
+
+## Override Nuxt runtime configuration
+
+You can override Nuxt runtime configuration by creating a `.env` file at the root of your project and
+using `NUXT_PUBLIC` prefix on any **existing** config vars name.
+
+```dotenv
+# .env
+NUXT_PUBLIC_BASE_URL=http://localhost:3000
+NUXT_PUBLIC_API_BASE_URL=http://roadiz-core-app.test/api
+NUXT_PUBLIC_INTERVENTION_REQUEST_BASE_URL=http://roadiz-core-app.test/assets
+NUXT_PUBLIC_INTERVENTION_REQUEST_NO_PROCESS_BASE_URL=http://roadiz-core-app.test/images
+``` 
+
+---
+
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
