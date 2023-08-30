@@ -19,12 +19,15 @@
     <h1 v-if="title">{{ title }}</h1>
 
     <v-block-factory :blocks="blocks"></v-block-factory>
+    <v-article-container v-if="articleContainer" :page="page"></v-article-container>
 </template>
 <script setup lang="ts">
 import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
 import useWebResponse from "~/composables/use-web-response";
 import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
 import {PageResponse} from "~/types/api";
+import {isArticleContainerEntity} from "~/utils/roadiz/entity";
+import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
 
 const { $webResponseFetch } = useNuxtApp()
 const { t, locale } = useI18n()
@@ -33,19 +36,13 @@ const route = useRoute()
 const pagePath = computed(() => {
     return route.path
 })
-const queryString = computed(() => {
-    return route.query
-})
 
 const { data: fetchResponse } = await useAsyncData<PageResponse>(
     (): Promise<PageResponse> => $webResponseFetch('/web_response_by_path', {
         query: {
             path: pagePath.value,
         }
-    }),
-    {
-        watch: [queryString]
-    }
+    })
 )
 if (!fetchResponse.value) {
     throw createError({ statusCode: 404, message: t('error.page_not_found').toString(), fatal: true })
@@ -80,5 +77,9 @@ const siteName = computed(() => {
 })
 const mainMenuWalker = computed(() => {
     return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
+})
+
+const articleContainer = computed(() => {
+    return isArticleContainerEntity(page.value)
 })
 </script>
