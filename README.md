@@ -1,4 +1,20 @@
-# Nuxt 3 Minimal Starter
+# Roadiz Nuxt 3 Minimal Starter and Layer
+
+## Migration from Nuxt2 starter TODO list
+
+- [x] Roadiz API plugin `$apiFetch` and global *useAsyncData*
+- [x] Block factory
+- [x] Page SEO
+- [x] Sitemap from Roadiz nodes-sources
+- [ ] `VForm` and form elements factory from JSON schema
+- [ ] Storybook integration
+- [ ] Themeable and ThemeProvider composables
+- [ ] HTTP cache middleware
+- [ ] eslint configuration
+- [ ] CI/CD configuration
+- [ ] Docker configuration
+- [ ] SCSS configuration
+- [ ] Basic components
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 

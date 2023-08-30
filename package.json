@@ -1,5 +1,5 @@
 {
-  "name": "@roadiz/nuxt3-starter",
+  "name": "@roadiz/nuxt3-layer",
   "private": true,
   "scripts": {
     "build": "nuxt build",
