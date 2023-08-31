@@ -111,9 +111,7 @@ const onOpen = () => {
 const onClose = () => {
     isOpen.value = false
 }
-// })
 </script>
-
 <style lang="scss" module>
 /**
  * ⚠️ !important rules reset Multiselect style

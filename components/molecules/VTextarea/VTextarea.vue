@@ -39,10 +39,10 @@ const { isFocused, isFilled, value, onBlur, onFocus } = useTextInput(props, emit
 
 <style lang="scss" module>
 .textarea {
-    width: 100%;
+    //width: 100%;
     min-height: rem(150);
-    border: none;
-    font-weight: bold;
+    //border: none;
+    //font-weight: bold;
 
     &:focus,
     &:focus-visible {

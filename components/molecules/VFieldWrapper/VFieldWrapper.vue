@@ -75,14 +75,14 @@ const classnames = computed(() => [
     pointer-events: none;
     user-select: none;
 
-    .root--default > .field > & {
-        position: absolute;
-        top: 0;
-        display: block;
-        font-weight: bold;
-        transform-origin: 0 center;
-        transition: all 0.2s ease-out;
-    }
+    //.root--default > .field > & {
+    //    position: absolute;
+    //    top: 0;
+    //    display: block;
+    //    font-weight: bold;
+    //    transform-origin: 0 center;
+    //    transition: all 0.2s ease-out;
+    //}
 
     .root--disabled & {
         opacity: 0.3;
@@ -98,11 +98,11 @@ const classnames = computed(() => [
         text-decoration: underline;
     }
 
-    .root--focused:not(.root--inline) &,
-    .root--filled:not(.root--inline) & {
-        opacity: 0.5;
-        transform: translate3d(0, #{rem(-20)}, 0) scale(0.7);
-    }
+    //.root--focused:not(.root--inline) &,
+    //.root--filled:not(.root--inline) & {
+    //    opacity: 0.5;
+    //    transform: translate3d(0, #{rem(-20)}, 0) scale(0.7);
+    //}
 }
 
 .description,

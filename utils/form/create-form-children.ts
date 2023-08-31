@@ -5,7 +5,6 @@ import VFormFieldset from '~/components/organisms/VForm/VFormFieldset.vue'
 import { useI18n } from '#imports'
 import {SelectOption} from "~/components/organisms/VSelect/VSelect.vue";
 
-
 export interface SetOption {
     label: string
     id?: string
@@ -181,13 +180,6 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                 })
             }
 
-            if (schema.type === 'boolean' && !!componentsMap.checkbox) {
-                return h(componentsMap.checkbox, {
-                    ...defaultProps,
-                    required
-                })
-            }
-
             if (schema.type === 'string' && schema.widget === 'file' && !!componentsMap.file) {
                 const attrs: Record<string, string> = {
                     ...defaultAttrs
@@ -202,7 +194,7 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                 return h(componentsMap.file, props)
             }
 
-            // input / textarea
+            // input / textarea / checkbox
             if (
                 ['string', 'boolean', 'integer', 'number'].includes(schema.type as string)
             ) {
@@ -254,7 +246,7 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                 }
                 props.modelValue = String(props.modelValue || '')
 
-                if (type === 'boolean') {
+                if (type === 'boolean' || type === 'checkbox') {
                     props.type = 'checkbox'
                 } else if (type === 'number') {
                     props.type = 'string'
