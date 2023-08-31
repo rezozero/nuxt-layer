@@ -11,19 +11,36 @@
 <!--        <div :class="$style.check" v-if="isCheckbox || isRadio">-->
 <!--            <icon-check v-if="isCheckbox" class="$style.check__icon" />-->
 <!--        </div>-->
-        <input
-            ref="input"
-            v-model="value"
-            :id="id"
-            :type="type"
-            :required="required"
-            :name="name"
-            :disabled="disabled"
-            :placeholder="placeholder"
-            :class="$style.input"
-            @focus="onFocus"
-            @blur="onBlur"
-        >
+        <template v-if="isCheckbox || isRadio" #beforeLabel>
+            <input
+                ref="input"
+                v-model="value"
+                :id="id"
+                :type="type"
+                :required="required"
+                :name="name"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                :class="$style.input"
+                @focus="onFocus"
+                @blur="onBlur"
+            >
+        </template>
+        <template #default v-else>
+            <input
+                    ref="input"
+                    v-model="value"
+                    :id="id"
+                    :type="type"
+                    :required="required"
+                    :name="name"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :class="$style.input"
+                    @focus="onFocus"
+                    @blur="onBlur"
+            >
+        </template>
     </v-field-wrapper>
 </template>
 <script setup lang="ts">
