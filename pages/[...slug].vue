@@ -20,6 +20,8 @@
 
     <v-block-factory :blocks="blocks"></v-block-factory>
     <v-article-container v-if="articleContainer" :page="page"></v-article-container>
+
+    <v-form :components-map="defaultComponentsMap" :schema="formSchema" v-model="formData"></v-form>
 </template>
 <script setup lang="ts">
 import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
@@ -28,6 +30,8 @@ import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
 import {PageResponse} from "~/types/api";
 import {isArticleContainerEntity} from "~/utils/roadiz/entity";
 import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
+import VForm from "~/components/organisms/VForm/VForm.vue";
+import defaultSchema from "~/components/organisms/VForm/schemas/default.js";
 
 const { $webResponseFetch } = useNuxtApp()
 const { t, locale } = useI18n()
@@ -81,5 +85,13 @@ const mainMenuWalker = computed(() => {
 
 const articleContainer = computed(() => {
     return isArticleContainerEntity(page.value)
+})
+
+const formData = ref({})
+const defaultComponentsMap = computed(() => {
+    return useDefaultComponentsMap()
+})
+const formSchema = computed(() => {
+    return defaultSchema
 })
 </script>

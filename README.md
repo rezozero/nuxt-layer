@@ -8,6 +8,7 @@
 - [x] InterventionRequest nuxt-image provider
 - [x] Sitemap from Roadiz nodes-sources
 - [ ] `VForm` and form elements factory from JSON schema
+- [ ] SVG loader
 - [ ] Storybook integration
 - [ ] Themeable and ThemeProvider composables
 - [ ] HTTP cache middleware
