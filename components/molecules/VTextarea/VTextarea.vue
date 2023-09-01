@@ -1,5 +1,5 @@
 <template>
-    <v-field-wrapper :label="label" :focused="isFocused" :filled="isFilled">
+    <v-field-wrapper :id="id" :label="label" :focused="isFocused" :filled="isFilled">
         <textarea
             v-bind="props"
             ref="input"

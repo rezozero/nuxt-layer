@@ -156,38 +156,6 @@ export default {
             },
             propertyOrder: 12,
         },
-        // description: {
-        //     type: 'string',
-        //     widget: 'markdown',
-        //     title: 'Description',
-        //     description: 'Description',
-        //     attr: {
-        //         'data-group': null,
-        //         placeholder: null
-        //     },
-        //     propertyOrder: 2
-        // },
-        organizations: {
-            type: 'array',
-            widget: 'organizations',
-            title: 'Organizations',
-            description: 'Description',
-            propertyOrder: 9
-        },
-        people: {
-            type: 'array',
-            widget: 'people',
-            title: 'People',
-            description: 'Description',
-            propertyOrder: 9
-        },
-        documents: {
-            type: 'array',
-            widget: 'documents',
-            title: 'Documents',
-            description: 'Description',
-            propertyOrder: 9
-        },
         countries: {
             enum: [
                 'AF',
@@ -944,6 +912,9 @@ export default {
                     'Zimbabwe',
                 ],
             },
+            attr: {
+                placeholder: 'Select a country',
+            },
             type: 'string',
             title: 'Countries',
             propertyOrder: 13,
@@ -958,11 +929,11 @@ export default {
             widget: 'file',
             propertyOrder: 14,
         },
-        recaptcha: {
+        'g-recaptcha-response': {
             type: 'string',
             title: 'recaptcha',
             propertyOrder: 15,
         },
     },
-    required: ['recaptcha'],
+    required: ['g-recaptcha-response'],
 }

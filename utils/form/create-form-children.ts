@@ -60,7 +60,6 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
             const defaultProps: Record<string, any> = {
                 id,
                 label: schema.title,
-                labelVisible: !!schema.title,
                 errorMessage,
                 isInvalid,
                 name,
@@ -92,7 +91,6 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                     ...defaultProps,
                     schema,
                     componentsMap,
-                    id,
                     virtual: schema?.attr?.virtual,
                     schemaKey: key,
                     modelValue: parentModelValues,
@@ -107,7 +105,6 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                     ...defaultProps,
                     schema,
                     componentsMap,
-                    id,
                     schemaKey: key
                 })
             }
@@ -170,10 +167,8 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
 
                 return h(component, {
                     ...defaultProps,
-                    legend: schema.title,
                     required,
                     options,
-                    placeholder: null, // prevent vue-multiselect placeholder
                     multiple: isMultiple,
                     inline,
                     modelValue: currentModelValue || (isMultiple ? [] : '')
@@ -256,7 +251,7 @@ export default function createFormChildren (parentProps: FactoryPropsTypes, emit
                     props.type = 'number'
                     props['onUpdate:modelValue'] =
                     (value: any) => emit('update:modelValue', { ...parentModelValues, [key]: Number.parseInt(value) })
-                    attrs.step = '1'
+                    props.step = '1'
                 } else if (type === 'datetime' || type === 'datetime-local') {
                     if (props.modelValue) {
                     // Handle timezones between data and client

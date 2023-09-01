@@ -1,44 +1,43 @@
 <template>
     <v-field-wrapper
+        :id="id"
         :label="label"
-        :class="$style.root"
         :inline="isCheckbox || isRadio"
         :disabled="disabled"
         :hideSeparator="hideSeparator"
         :focused="isFocused"
         :filled="isFilled || prefilled"
     >
-<!--        <div :class="$style.check" v-if="isCheckbox || isRadio">-->
-<!--            <icon-check v-if="isCheckbox" class="$style.check__icon" />-->
-<!--        </div>-->
         <template v-if="isCheckbox || isRadio" #beforeLabel>
             <input
                 ref="input"
                 v-model="value"
                 :id="id"
+                :step="step"
+                :autocomplete="autocomplete"
                 :type="type"
                 :required="required"
                 :name="name"
                 :disabled="disabled"
                 :placeholder="placeholder"
-                :class="$style.input"
                 @focus="onFocus"
                 @blur="onBlur"
             >
         </template>
         <template #default v-else>
             <input
-                    ref="input"
-                    v-model="value"
-                    :id="id"
-                    :type="type"
-                    :required="required"
-                    :name="name"
-                    :disabled="disabled"
-                    :placeholder="placeholder"
-                    :class="$style.input"
-                    @focus="onFocus"
-                    @blur="onBlur"
+                ref="input"
+                v-model="value"
+                :id="id"
+                :step="step"
+                :autocomplete="autocomplete"
+                :type="type"
+                :required="required"
+                :name="name"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                @focus="onFocus"
+                @blur="onBlur"
             >
         </template>
     </v-field-wrapper>
@@ -52,6 +51,10 @@ const props = defineProps({
     ...defaultProps,
     id: String,
     modelValue: {
+        type: String,
+        default: undefined,
+    },
+    step: {
         type: String,
         default: undefined,
     },
@@ -71,9 +74,3 @@ const isCheckbox = computed(() => props.type === 'checkbox')
 const isRadio = computed(() => props.type === 'radio')
 const prefilled = computed(() => props.type === 'date' || props.type === 'datetime-local' || props.type === 'file' || !!props.placeholder)
 </script>
-
-<style lang="scss" module>
-.root {
-
-}
-</style>

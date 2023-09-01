@@ -15,6 +15,8 @@ export interface FormElementProps {
     disabled?: Boolean,
     hideSeparator?: Boolean,
     description?: String,
+    autocomplete?: String,
+    placeholder?: String,
     parents?: string[],
 }
 
@@ -26,5 +28,7 @@ export const defaultProps = {
     disabled: Boolean,
     hideSeparator: Boolean,
     description: String,
+    autocomplete: String,
+    placeholder: String,
     parents: Array as PropType<string[]>,
 }

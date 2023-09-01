@@ -1,6 +1,7 @@
 <template>
     <v-field-wrapper
         tag="fieldset"
+        :id="id"
         :label="false"
         :description="false"
         :class="[$style.root, disabled && $style['root--disabled'], errors && $style['root--errors']]"

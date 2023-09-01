@@ -1,20 +1,23 @@
 <template>
     <h1><nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link></h1>
-    <p>Locale: {{ locale }}</p>
-    <nav v-if="mainMenuWalker">
-        <ul>
-            <li v-for="subWalker in mainMenuWalker.children">
-                <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
-            </li>
-        </ul>
-    </nav>
+
     <nav>
+        <p>i18n Locale: {{ locale }}</p>
         <ul>
             <li v-for="alternateLink in alternateLinks">
                 <nuxt-link
                         v-if="alternateLink.locale !== page?.translation?.locale"
                         :to="alternateLink.url">{{ alternateLink.title }}</nuxt-link>
                 <span v-else>{{ alternateLink.title }}</span>
+            </li>
+        </ul>
+    </nav>
+
+    <nav v-if="mainMenuWalker">
+        <p>Main menu</p>
+        <ul>
+            <li v-for="subWalker in mainMenuWalker.children">
+                <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
             </li>
         </ul>
     </nav>
@@ -30,6 +33,17 @@
         v-model="formData"
         @submit="onFormSubmit"
     ></v-form>
+
+    <footer>
+        <nav v-if="footerMenuWalker">
+            <p>Footer menu</p>
+            <ul>
+                <li v-for="subWalker in footerMenuWalker.children">
+                    <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
+                </li>
+            </ul>
+        </nav>
+    </footer>
 </template>
 <script setup lang="ts">
 import {RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
@@ -39,7 +53,7 @@ import {HydraError, PageResponse} from "~/types/api";
 import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
 import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
 import VForm from "~/components/organisms/VForm/VForm.vue";
-import defaultSchema from "~/components/organisms/VForm/schemas/default.js";
+import defaultSchema from "~/components/organisms/VForm/schemas/all-fields.js";
 import VBreadcrumbs from "~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue";
 
 const { $webResponseFetch } = useNuxtApp()
@@ -99,6 +113,9 @@ const siteName = computed(() => {
 })
 const mainMenuWalker = computed(() => {
     return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
+})
+const footerMenuWalker = computed(() => {
+    return useCommonContents().value?.menus?.footerMenuWalker as RoadizWalker
 })
 const articleContainer = computed(() => {
     return isArticleContainerEntity(page.value)
