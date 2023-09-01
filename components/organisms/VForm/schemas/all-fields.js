@@ -935,5 +935,5 @@ export default {
             propertyOrder: 15,
         },
     },
-    required: ['g-recaptcha-response'],
+    required: ['g-recaptcha-response', 'email'],
 }

@@ -3,6 +3,7 @@
         :id="id"
         :label="label"
         :inline="isCheckbox || isRadio"
+        :required="required"
         :disabled="disabled"
         :hideSeparator="hideSeparator"
         :focused="isFocused"

@@ -3,6 +3,7 @@
         tag="fieldset"
         :id="id"
         :label="false"
+        :required="required"
         :description="false"
         :class="[$style.root, disabled && $style['root--disabled'], errors && $style['root--errors']]"
         :disabled="disabled"
