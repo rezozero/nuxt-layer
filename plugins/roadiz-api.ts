@@ -107,6 +107,11 @@ export const apiFetchFactory = () => {
                 }
             },
             async onResponseError({ request, response, options }) {
+                const lastApiFetchError = useLastApiFetchError()
+                lastApiFetchError.value = {
+                    statusCode: response.status,
+                    responseBody: response._data,
+                }
                 console.debug(
                     '[apiFetch response error]',
                     request,

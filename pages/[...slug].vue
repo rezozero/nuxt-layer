@@ -32,10 +32,10 @@
     ></v-form>
 </template>
 <script setup lang="ts">
-import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
+import {RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
 import useWebResponse from "~/composables/use-web-response";
 import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
-import {PageResponse} from "~/types/api";
+import {HydraError, PageResponse} from "~/types/api";
 import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
 import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
 import VForm from "~/components/organisms/VForm/VForm.vue";
@@ -52,10 +52,20 @@ const pagePath = computed(() => {
 
 const { data: fetchResponse } = await useAsyncData<PageResponse>(
     'web_response',
-    (): Promise<PageResponse> => $webResponseFetch(pagePath.value)
+    async (): Promise<PageResponse> => await $webResponseFetch(pagePath.value)
 )
 if (!fetchResponse.value) {
-    throw createError({ statusCode: 404, message: t('error.page_not_found').toString(), fatal: true })
+    /*
+     * Throw a Nuxt Error using the same statusCode and message as the API response
+     */
+    const lastApiFetchError = useLastApiFetchError()
+    const body = lastApiFetchError.value?.responseBody as HydraError
+    const message = body?.['hydra:description'] || body?.message || t('error.page_not_found').toString()
+    throw createError({
+        statusCode: lastApiFetchError.value?.statusCode,
+        message: '[web_response] ' + message,
+        fatal: true,
+    })
 }
 
 const {

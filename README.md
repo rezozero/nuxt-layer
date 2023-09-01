@@ -3,6 +3,7 @@
 ## Migration from Nuxt2 starter TODO list
 
 - [x] Roadiz API plugin `$apiFetch` and global *useAsyncData*
+- [x] Parse and render apiFetch hydra-error
 - [x] Block factory
 - [x] Page SEO
 - [x] InterventionRequest nuxt-image provider
