@@ -27,7 +27,7 @@
 
         <vue-multiselect
             ref="multiselect"
-            @update:model-value="$emit('update:modelValue', $event)"
+            v-model="optionValue"
             :options="options"
             :multiple="multiple"
             :close-on-select="!multiple"
@@ -59,7 +59,7 @@
 import type {PropType} from 'vue'
 import VueMultiselect from "vue-multiselect";
 // import IconChevronDown from '~/assets/images/icons/chevron-down.svg?sprite'
-// import 'vue-multiselect/dist/vue-multiselect.css'
+import 'vue-multiselect/dist/vue-multiselect.css'
 // import IconCheck from '~/assets/images/icons/check.svg?sprite'
 import {defaultProps} from "~/utils/form/form-element";
 import VFieldWrapper from "~/components/molecules/VFieldWrapper/VFieldWrapper.vue";
@@ -95,6 +95,22 @@ const placeholder = computed(() => props.placeholder)
 const isFilled = computed(() => {
     if (Array.isArray(props.modelValue)) return props.modelValue.length > 0
     else return !!props.modelValue
+})
+const optionValue = computed<SelectOption|SelectOption[]|undefined>({
+    get() {
+        if (Array.isArray(props.modelValue)) {
+            return options.value.filter((option) => props.modelValue?.includes(option.value))
+        } else {
+            return options.value.find((option) => option.value === props.modelValue)
+        }
+    },
+    set(value) {
+        if (Array.isArray(value)) {
+            emit('update:modelValue', value.map((option) => option.value))
+        } else {
+            emit('update:modelValue', value?.value)
+        }
+    },
 })
 
 const isSelectedOption = (option: SelectOption): boolean => {

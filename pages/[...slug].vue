@@ -11,7 +11,9 @@
     <nav>
         <ul>
             <li v-for="alternateLink in alternateLinks">
-                <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{ alternateLink.title }}</nuxt-link>
+                <nuxt-link
+                        v-if="alternateLink.locale !== page?.translation?.locale"
+                        :to="alternateLink.url">{{ alternateLink.title }}</nuxt-link>
                 <span v-else>{{ alternateLink.title }}</span>
             </li>
         </ul>
@@ -20,15 +22,15 @@
 
     <v-block-factory :blocks="blocks"></v-block-factory>
     <v-article-container v-if="articleContainer" :page="page"></v-article-container>
-
-    <v-form :components-map="defaultComponentsMap" :schema="formSchema" v-model="formData"></v-form>
+<!--  Example v-form with modelValue  -->
+    <v-form v-if="pageEntity" :components-map="defaultComponentsMap" :schema="formSchema" v-model="formData" @submit="onFormSubmit"></v-form>
 </template>
 <script setup lang="ts">
 import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
 import useWebResponse from "~/composables/use-web-response";
 import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
 import {PageResponse} from "~/types/api";
-import {isArticleContainerEntity} from "~/utils/roadiz/entity";
+import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
 import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
 import VForm from "~/components/organisms/VForm/VForm.vue";
 import defaultSchema from "~/components/organisms/VForm/schemas/default.js";
@@ -86,6 +88,9 @@ const mainMenuWalker = computed(() => {
 const articleContainer = computed(() => {
     return isArticleContainerEntity(page.value)
 })
+const pageEntity = computed(() => {
+    return isPageEntity(page.value)
+})
 
 const formData = ref({})
 const defaultComponentsMap = computed(() => {
@@ -94,4 +99,8 @@ const defaultComponentsMap = computed(() => {
 const formSchema = computed(() => {
     return defaultSchema
 })
+
+const onFormSubmit = () => {
+    console.log(formData.value)
+}
 </script>
