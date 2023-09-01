@@ -7,7 +7,9 @@
 - [x] Page SEO
 - [x] InterventionRequest nuxt-image provider
 - [x] Sitemap from Roadiz nodes-sources
-- [ ] `VForm` and form elements factory from JSON schema
+- [x] `VForm` and form elements factory from JSON schema
+- [x] Preview aware routing with `_preview` query parameter and JWT bearer
+    Using `usePreview` state composable and global route middleware
 - [ ] SVG loader
 - [ ] Storybook integration
 - [ ] Themeable and ThemeProvider composables

@@ -72,13 +72,27 @@ const commonHeaders = (opts?: FetchOptions): Record<string, string> => {
 /*
  * Factory: create a new fetch instance with common headers and base URL.
  */
-export const apiFetch = () => {
+export const apiFetchFactory = () => {
     const runtimeConfig = useRuntimeConfig()
     const headers= commonHeaders({})
     const baseURL = runtimeConfig.public.apiBaseUrl
 
     return $fetch.create(
         {
+            async onRequest({ request, options }) {
+                // Log request
+                const preview = usePreview()
+                if (preview.value.preview && preview.value.previewToken) {
+                    options.query = {
+                        ...options.query,
+                        _preview: '1',
+                    }
+                    options.headers = {
+                        ...options.headers,
+                        'Authorization': `Bearer ${preview.value.previewToken}`
+                    }
+                }
+            },
             async onResponseError({ request, response, options }) {
                 console.debug(
                     '[apiFetch response error]',
@@ -93,17 +107,35 @@ export const apiFetch = () => {
     )
 }
 
+export const apiFetch = async<T>(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<T> => {
+    const fetch = apiFetchFactory()
+    const { locale, defaultLocale } = useI18n()
+    return fetch(relativePath, {
+        ...opts,
+        query: {
+            ...opts?.query,
+            _locale: locale.value || defaultLocale.toString()
+        }
+    })
+}
+
 /*
  * Fetch a page from Roadiz API and return its alternate links extracted from response headers.
  * If common content are not loaded yet, it will fetch them.
  */
 const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<PageResponse> => {
-    const fetch = apiFetch()
+    const fetch = apiFetchFactory()
     const { setLocale } = useI18n()
 
     const response = await fetch.raw<RoadizWebResponse>(
-        relativePath,
-        opts,
+        '/web_response_by_path',
+        {
+            ...opts,
+            method: 'GET',
+            query: {
+                path: relativePath
+            }
+        },
     )
     const alternateLinks = getAlternateLinks(response)
     const webResponse = response._data
@@ -118,6 +150,7 @@ const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<an
          * Fetch common contents if locale has changed
          */
         useCommonContents().value = await fetch<CommonContent>('/common_content', {
+            method: 'GET',
             query: {
                 _locale: locale
             }
@@ -134,7 +167,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // called right after a new locale has been set
     nuxtApp.hook('i18n:localeSwitched', async ({oldLocale, newLocale}) => {
         if (oldLocale !== newLocale) {
-            const fetch = apiFetch()
+            const fetch = apiFetchFactory()
             /*
              * Fetch common contents again if locale has changed
              */
@@ -148,7 +181,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     return {
         provide: {
-            apiFetch: apiFetch(),
+            apiFetch,
             webResponseFetch,
         }
     }

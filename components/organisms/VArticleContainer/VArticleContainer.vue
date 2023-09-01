@@ -25,16 +25,22 @@ const pageIndex = computed(() => {
 })
 
 const props = defineProps({
-    page: Object as PropType<RoadizNodesSources>
+    articleContainer: Object as PropType<RoadizNodesSources>
 })
 
 const { data: hydraCollection } = await useAsyncData<HydraCollection<RoadizNodesSources>>(
-    'articles',
-    () => $apiFetch<HydraCollection<RoadizNodesSources>>('/articles', {
-        query: {
-            page: pageIndex.value
-        },
-    }),
+    async () => {
+        const route = useRoute()
+        const page = route.query?.page || '1'
+        return await $apiFetch<HydraCollection<RoadizNodesSources>>('/articles', {
+            query: {
+                page,
+                'node.parent': props.articleContainer?.node["@id"],
+                'order[publishedAt]': 'desc',
+                'node.visible': true
+            },
+        })
+    },
     {
         watch: [pageIndex]
     }
@@ -44,9 +50,13 @@ const articles = computed(() => {
     return hydraCollection.value?.['hydra:member']
 })
 const previousPageUrl = computed(() => {
-    return hydraCollection.value?.['hydra:view']?.['hydra:previous'] ? props.page?.url + '?page=' + (parseInt(pageIndex.value) - 1) : null
+    return hydraCollection.value?.['hydra:view']?.['hydra:previous'] ?
+        props.articleContainer?.url + '?page=' + (parseInt(pageIndex.value as string) - 1) :
+        null
 })
 const nextPageUrl = computed(() => {
-    return hydraCollection.value?.['hydra:view']?.['hydra:next'] ? props.page?.url + '?page=' + (parseInt(pageIndex.value) + 1) : null
+    return hydraCollection.value?.['hydra:view']?.['hydra:next'] ?
+        props.articleContainer?.url + '?page=' + (parseInt(pageIndex.value as string) + 1) :
+        null
 })
 </script>

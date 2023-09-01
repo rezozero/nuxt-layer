@@ -18,12 +18,18 @@
             </li>
         </ul>
     </nav>
+    <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />
     <h1 v-if="title">{{ title }}</h1>
-
     <v-block-factory :blocks="blocks"></v-block-factory>
-    <v-article-container v-if="articleContainer" :page="page"></v-article-container>
+    <v-article-container v-if="articleContainer" :article-container="page" />
 <!--  Example v-form with modelValue  -->
-    <v-form v-if="pageEntity" :components-map="defaultComponentsMap" :schema="formSchema" v-model="formData" @submit="onFormSubmit"></v-form>
+    <v-form
+        v-if="pageEntity"
+        :components-map="defaultComponentsMap"
+        :schema="formSchema"
+        v-model="formData"
+        @submit="onFormSubmit"
+    ></v-form>
 </template>
 <script setup lang="ts">
 import {RoadizNodesSources, RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
@@ -34,6 +40,7 @@ import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
 import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
 import VForm from "~/components/organisms/VForm/VForm.vue";
 import defaultSchema from "~/components/organisms/VForm/schemas/default.js";
+import VBreadcrumbs from "~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue";
 
 const { $webResponseFetch } = useNuxtApp()
 const { t, locale } = useI18n()
@@ -44,25 +51,21 @@ const pagePath = computed(() => {
 })
 
 const { data: fetchResponse } = await useAsyncData<PageResponse>(
-    (): Promise<PageResponse> => $webResponseFetch('/web_response_by_path', {
-        query: {
-            path: pagePath.value,
-        }
-    })
+    (): Promise<PageResponse> => $webResponseFetch(pagePath.value)
 )
 if (!fetchResponse.value) {
     throw createError({ statusCode: 404, message: t('error.page_not_found').toString(), fatal: true })
 }
 
 const {
-    webResponse,
     page,
     title,
     blocks,
     alternateLinks,
     getHeadMeta,
     getHeadLinks,
-    getHeadScripts
+    getHeadScripts,
+    breadcrumbs
 } = useWebResponse(fetchResponse, useCommonContents())
 
 useHead({
@@ -84,14 +87,15 @@ const siteName = computed(() => {
 const mainMenuWalker = computed(() => {
     return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
 })
-
 const articleContainer = computed(() => {
     return isArticleContainerEntity(page.value)
 })
 const pageEntity = computed(() => {
     return isPageEntity(page.value)
 })
-
+/*
+ * VForm Example configuration
+ */
 const formData = ref({})
 const defaultComponentsMap = computed(() => {
     return useDefaultComponentsMap()
@@ -99,7 +103,6 @@ const defaultComponentsMap = computed(() => {
 const formSchema = computed(() => {
     return defaultSchema
 })
-
 const onFormSubmit = () => {
     console.log(formData.value)
 }

@@ -1,0 +1,20 @@
+<template>
+    <nav aria-label="Breadcrumb" class="breadcrumb" v-if="breadcrumbs?.items.length">
+        <ol>
+            <li v-if="homePage">
+                <nuxt-link :to="homePage.url">{{ homePage.title }}</nuxt-link>
+            </li>
+            <li v-for="breadcrumb in breadcrumbs.items">
+                <nuxt-link :to="breadcrumb.url">{{ breadcrumb.title }}</nuxt-link>
+            </li>
+        </ol>
+    </nav>
+</template>
+<script setup lang="ts">
+import {RoadizBreadcrumbs, RoadizNodesSources} from "@roadiz/abstract-api-client/dist/types/roadiz";
+
+const props = defineProps({
+    breadcrumbs: Object as PropType<RoadizBreadcrumbs>,
+    homePage: Object as PropType<RoadizNodesSources>,
+})
+</script>

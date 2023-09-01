@@ -75,6 +75,7 @@ export default function (
     }
 
     const getHeadMeta = (): Meta[] => {
+        const preview = usePreview()
         const title =  head.value?.metaTitle || getDefaultMetaTitle()
         const description = getMetaDescription()
         const url = joinURL(runtimeConfig.public.baseUrl, page.value?.url || '')
@@ -105,7 +106,7 @@ export default function (
             }
         ]
 
-        if ((page.value as RoadizNodesSources)?.noIndex) {
+        if ((page.value as RoadizNodesSources)?.noIndex || preview.value.preview) {
             meta.push({ name: 'robots', content: 'noindex' })
         }
 
