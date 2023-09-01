@@ -14,6 +14,7 @@
 - [x] Bug: Same i18n locale in server and client at first request \
     Need to set locale again in `app:beforeMount` hook
 - [ ] Bug: `ArticleContainer` component is instantiated twice on SSR
+- [ ] Bug: i18n locale messages are not loaded on production build
 - [ ] SVG loader
 - [ ] Storybook integration
 - [ ] Themeable and ThemeProvider composables
