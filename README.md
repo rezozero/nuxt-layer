@@ -9,9 +9,10 @@
 - [x] InterventionRequest nuxt-image provider
 - [x] Sitemap from Roadiz nodes-sources
 - [x] `VForm` and form elements factory from JSON schema
-- [x] Preview aware routing with `_preview` query parameter and JWT bearer
+- [x] Preview aware routing with `_preview` query parameter and JWT bearer \
     Using `usePreview` state composable and global route middleware
-- [ ] Bug: Same i18n locale in server and client at first request
+- [x] Bug: Same i18n locale in server and client at first request \
+    Need to set locale again in `app:beforeMount` hook
 - [ ] Bug: `ArticleContainer` component is instantiated twice on SSR
 - [ ] SVG loader
 - [ ] Storybook integration

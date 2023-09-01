@@ -49,6 +49,7 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
+    // Use no_prefix strategy to avoid redirecting localized paths without locale prefix
     strategy: 'no_prefix',
     detectBrowserLanguage: false,
     defaultLocale,

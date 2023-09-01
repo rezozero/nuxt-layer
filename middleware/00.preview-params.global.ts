@@ -7,7 +7,9 @@ import {defineNuxtRouteMiddleware} from '#app'
 export default defineNuxtRouteMiddleware((to) => {
     const previewState = usePreview()
     if (to.query?._preview === '1' && to.query?.token) {
-        previewState.value.preview = true
-        previewState.value.previewToken = to.query.token as string
+        previewState.value = {
+            preview: true,
+            previewToken: to.query.token as string
+        }
     }
 })

@@ -26,7 +26,8 @@ interface HydraErrorTraceItem {
 
 interface PageResponse {
     webResponse: RoadizWebResponse | undefined,
-    alternateLinks?: RoadizAlternateLink[]
+    alternateLinks?: RoadizAlternateLink[],
+    locale?: string,
 }
 
 interface CommonContent {

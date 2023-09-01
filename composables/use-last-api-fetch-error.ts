@@ -1,5 +1,3 @@
-import {FetchResponse} from "ofetch";
-
 export interface ApiFetchError {
     statusCode: number,
     responseBody: unknown,

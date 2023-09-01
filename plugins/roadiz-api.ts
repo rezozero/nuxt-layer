@@ -164,13 +164,15 @@ const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<an
             })
         }
         webResponseLocale.value = { locale }
+        // Set i18n locale on both client and server side
         await $i18n.setLocale(locale)
     }
 
     return {
         webResponse,
-        alternateLinks
-    }
+        alternateLinks,
+        locale
+    } as PageResponse
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -189,7 +191,16 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
     })
 
+    nuxtApp.hook('app:beforeMount', async (vueApp) => {
+        const webResponseLocale = useWebResponseLocale()
+        if (webResponseLocale.value.locale && webResponseLocale.value.locale !== vueApp.$nuxt.$i18n.locale.value) {
+            console.debug('[app:beforeMount] Set i18n locale to', webResponseLocale.value.locale)
+            await vueApp.$nuxt.$i18n.setLocale(webResponseLocale.value.locale)
+        }
+    })
+
     return {
+        parallel: true,
         provide: {
             apiFetch: apiFetchFactory(),
             webResponseFetch,

@@ -46,6 +46,9 @@ export default function (
         const event = page.value as EventsApi.Event
         return nodeSource?.title || event?.name || undefined
     })
+    const locale = computed(() => {
+        return pageResponse.value?.locale
+    })
     const metaTitle = computed(() => {
         return head.value?.metaTitle || getDefaultMetaTitle()
     })
@@ -215,6 +218,7 @@ export default function (
 
     return {
         webResponse,
+        locale,
         page,
         title,
         metaTitle,

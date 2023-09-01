@@ -43,7 +43,7 @@ import defaultSchema from "~/components/organisms/VForm/schemas/default.js";
 import VBreadcrumbs from "~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue";
 
 const { $webResponseFetch } = useNuxtApp()
-const { t, locale } = useI18n()
+const { t, locale, setLocale } = useI18n()
 const route = useRoute()
 
 const pagePath = computed(() => {
@@ -70,6 +70,7 @@ if (!fetchResponse.value) {
 
 const {
     page,
+    locale: webResponseLocale,
     metaTitle,
     title,
     blocks,
