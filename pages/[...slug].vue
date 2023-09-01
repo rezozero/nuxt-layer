@@ -51,6 +51,7 @@ const pagePath = computed(() => {
 })
 
 const { data: fetchResponse } = await useAsyncData<PageResponse>(
+    'web_response',
     (): Promise<PageResponse> => $webResponseFetch(pagePath.value)
 )
 if (!fetchResponse.value) {
@@ -59,6 +60,7 @@ if (!fetchResponse.value) {
 
 const {
     page,
+    metaTitle,
     title,
     blocks,
     alternateLinks,
@@ -72,7 +74,7 @@ useHead({
     htmlAttrs: {
         lang: locale.value,
     },
-    title: (page.value as RoadizNodesSources)?.title,
+    title: metaTitle.value,
     meta: getHeadMeta(),
     link: getHeadLinks(),
     script: getHeadScripts(),

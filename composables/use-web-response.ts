@@ -41,11 +41,13 @@ export default function (
     const alternateLinks = computed(() => {
         return pageResponse.value?.alternateLinks
     })
-
     const title = computed(() => {
         const nodeSource = page.value as RoadizNodesSources
         const event = page.value as EventsApi.Event
         return nodeSource?.title || event?.name || undefined
+    })
+    const metaTitle = computed(() => {
+        return head.value?.metaTitle || getDefaultMetaTitle()
     })
 
     const getDefaultMetaTitle = (): string => {
@@ -76,12 +78,11 @@ export default function (
 
     const getHeadMeta = (): Meta[] => {
         const preview = usePreview()
-        const title =  head.value?.metaTitle || getDefaultMetaTitle()
         const description = getMetaDescription()
         const url = joinURL(runtimeConfig.public.baseUrl, page.value?.url || '')
         const meta = [
             { name: 'description', content: description },
-            { property: 'og:title', content: title },
+            { property: 'og:title', content: metaTitle.value },
             { property: 'og:site_name', content: commonContents.value?.head?.siteName },
             { property: 'og:description', content: description },
             {
@@ -92,7 +93,7 @@ export default function (
             {
                 hid: 'twitter:title',
                 name: 'twitter:title',
-                content: title || '',
+                content: metaTitle.value || '',
             },
             {
                 hid: 'twitter:description',
@@ -216,6 +217,7 @@ export default function (
         webResponse,
         page,
         title,
+        metaTitle,
         pageType,
         blocks,
         breadcrumbs,

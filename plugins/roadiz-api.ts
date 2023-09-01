@@ -4,7 +4,7 @@ import {
     RoadizNodesSources,
     RoadizWebResponse
 } from "@roadiz/abstract-api-client/dist/types/roadiz";
-import {NitroFetchOptions} from "nitropack";
+import {$Fetch, NitroFetchOptions} from "nitropack";
 import {CommonContent, PageResponse} from "~/types/api";
 import {EventsApi} from "~/types/event";
 
@@ -80,7 +80,9 @@ export const apiFetchFactory = () => {
     return $fetch.create(
         {
             async onRequest({ request, options }) {
-                // Log request
+                /*
+                 * Add preview token to every request if preview mode is enabled.
+                 */
                 const preview = usePreview()
                 if (preview.value.preview && preview.value.previewToken) {
                     options.query = {
@@ -90,6 +92,17 @@ export const apiFetchFactory = () => {
                     options.headers = {
                         ...options.headers,
                         'Authorization': `Bearer ${preview.value.previewToken}`
+                    }
+                }
+                /*
+                 * Add locale to every request if it is not a web response request.
+                 */
+                if (request.toString() !== '/web_response_by_path') {
+                    const webResponseLocale = useWebResponseLocale()
+                    const { $i18n } = useNuxtApp()
+                    options.query = {
+                        ...options.query,
+                        _locale: webResponseLocale.value?.locale || $i18n.locale.value || $i18n.defaultLocale.toString()
                     }
                 }
             },
@@ -107,27 +120,15 @@ export const apiFetchFactory = () => {
     )
 }
 
-export const apiFetch = async<T>(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<T> => {
-    const fetch = apiFetchFactory()
-    const { locale, defaultLocale } = useI18n()
-    return fetch(relativePath, {
-        ...opts,
-        query: {
-            ...opts?.query,
-            _locale: locale.value || defaultLocale.toString()
-        }
-    })
-}
-
 /*
  * Fetch a page from Roadiz API and return its alternate links extracted from response headers.
  * If common content are not loaded yet, it will fetch them.
  */
 const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<any, any>): Promise<PageResponse> => {
-    const fetch = apiFetchFactory()
-    const { setLocale } = useI18n()
+    const { $i18n, $apiFetch } = useNuxtApp()
+    const webResponseLocale = useWebResponseLocale()
 
-    const response = await fetch.raw<RoadizWebResponse>(
+    const response = await $apiFetch.raw<RoadizWebResponse>(
         '/web_response_by_path',
         {
             ...opts,
@@ -143,18 +144,22 @@ const webResponseFetch = async(relativePath: string, opts?: NitroFetchOptions<an
     const locale = (item as RoadizNodesSources)?.translation?.locale || (item as EventsApi.Event)?.locale || undefined
 
     if (locale) {
-        await setLocale(locale)
-    }
-    if (!useCommonContents().value && locale) {
         /*
-         * Fetch common contents if locale has changed
+         * Fetch common contents only if locale has changed
          */
-        useCommonContents().value = await fetch<CommonContent>('/common_content', {
-            method: 'GET',
-            query: {
-                _locale: locale
-            }
-        })
+        if (process.server && webResponseLocale.value.locale !== locale) {
+            /*
+             * Fetch common contents if locale has changed
+             */
+            useCommonContents().value = await $apiFetch<CommonContent>('/common_content', {
+                method: 'GET',
+                query: {
+                    _locale: locale
+                }
+            })
+        }
+        webResponseLocale.value = { locale }
+        await $i18n.setLocale(locale)
     }
 
     return {
@@ -167,11 +172,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     // called right after a new locale has been set
     nuxtApp.hook('i18n:localeSwitched', async ({oldLocale, newLocale}) => {
         if (oldLocale !== newLocale) {
-            const fetch = apiFetchFactory()
             /*
              * Fetch common contents again if locale has changed
              */
-            useCommonContents().value = await fetch<CommonContent>('/common_content', {
+            useCommonContents().value = await (nuxtApp.$apiFetch as $Fetch)<CommonContent>('/common_content', {
+                method: 'GET',
                 query: {
                     _locale: newLocale
                 }
@@ -181,7 +186,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     return {
         provide: {
-            apiFetch,
+            apiFetch: apiFetchFactory(),
             webResponseFetch,
         }
     }

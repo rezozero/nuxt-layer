@@ -1,4 +1,7 @@
 {
     "test": "Test EN",
+    "articlecontainer.title": "Articles listing",
+    "articlecontainer.next": "Next page",
+    "articlecontainer.previous": "Previous page",
     "error.page_not_found": "Page not found"
 }

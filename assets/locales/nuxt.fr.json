@@ -1,4 +1,7 @@
 {
     "test": "Test FR",
+    "articlecontainer.title": "Liste des Articles",
+    "articlecontainer.next": "Page suivante",
+    "articlecontainer.previous": "Page précédente",
     "error.page_not_found": "Page introuvable"
 }

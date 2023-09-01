@@ -57,6 +57,6 @@ export default defineNuxtConfig({
       file: `nuxt.${locale}.json`,
     })),
     lazy: true,
-    langDir: 'assets/locales/',
+    langDir: 'assets/locales/'
   }
 })

@@ -1,5 +1,5 @@
 <template>
-    <p>Articles list</p>
+    <p>{{ $t('articlecontainer.title') }}</p>
     <ul>
         <li v-for="article in articles">
             <nuxt-link :to="article.url">{{ article.title }}</nuxt-link>
@@ -8,8 +8,8 @@
 
     <nav>
         <ul>
-            <li v-if="previousPageUrl"><nuxt-link :to="previousPageUrl">Previous</nuxt-link></li>
-            <li v-if="nextPageUrl"><nuxt-link :to="nextPageUrl">Next</nuxt-link></li>
+            <li v-if="previousPageUrl"><nuxt-link :to="previousPageUrl">{{ $t('articlecontainer.previous') }}</nuxt-link></li>
+            <li v-if="nextPageUrl"><nuxt-link :to="nextPageUrl">{{ $t('articlecontainer.next') }}</nuxt-link></li>
         </ul>
     </nav>
 </template>
@@ -29,12 +29,11 @@ const props = defineProps({
 })
 
 const { data: hydraCollection } = await useAsyncData<HydraCollection<RoadizNodesSources>>(
+    'articles_listing',
     async () => {
-        const route = useRoute()
-        const page = route.query?.page || '1'
         return await $apiFetch<HydraCollection<RoadizNodesSources>>('/articles', {
             query: {
-                page,
+                page: pageIndex.value,
                 'node.parent': props.articleContainer?.node["@id"],
                 'order[publishedAt]': 'desc',
                 'node.visible': true

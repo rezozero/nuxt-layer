@@ -10,6 +10,8 @@
 - [x] `VForm` and form elements factory from JSON schema
 - [x] Preview aware routing with `_preview` query parameter and JWT bearer
     Using `usePreview` state composable and global route middleware
+- [ ] Bug: Same i18n locale in server and client at first request
+- [ ] Bug: `ArticleContainer` component is instantiated twice on SSR
 - [ ] SVG loader
 - [ ] Storybook integration
 - [ ] Themeable and ThemeProvider composables
