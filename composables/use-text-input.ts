@@ -1,19 +1,19 @@
-import {FormElementProps} from "~/utils/form/form-element";
-import {Ref} from "@vue/reactivity";
+import { Ref } from 'vue'
+import { FormElementProps } from '~/utils/form/form-element'
 
 export interface TextFormElementProps extends FormElementProps {
-    modelValue?: string,
+    modelValue?: string
 }
 
 export default function (props: TextFormElementProps, emit: Function, inputRef: Ref<HTMLInputElement | null>) {
     const isFocused = ref(false)
     const value = computed({
-        get () {
+        get() {
             return props.modelValue
         },
-        set (value) {
+        set(value) {
             emit('update:modelValue', value)
-        }
+        },
     })
     const isFilled = computed(() => !!value.value?.length)
 

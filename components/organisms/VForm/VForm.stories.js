@@ -12,21 +12,21 @@ export default {
     component: VForm,
     decorators: [() => ({ template: '<div style="max-width: 600px; margin: 0 auto;"><story /></div>' })],
     args: {
-        disabled: false
-    }
+        disabled: false,
+    },
 }
 
 const defaultData = {
-    prenom: 'James'
+    prenom: 'James',
 }
 
 const componentsMap = useDefaultComponentsMap()
 
-const Template = args => ({
+const Template = (args) => ({
     // Components used in your story `template` are defined in the `components` object
     components: { VForm },
     // The story's `args` need to be mapped into the template through the `setup()` method
-    setup () {
+    setup() {
         return { args }
     },
     // And then the `args` are bound to your component with `v-bind="args"`
@@ -37,14 +37,14 @@ export const Default = Template.bind({})
 Default.args = {
     data: defaultData,
     schema: defaultSchema,
-    componentsMap
+    componentsMap,
 }
 
 export const AllFields = Template.bind({})
 AllFields.args = {
     data: defaultData,
     schema: allFieldsSchema,
-    componentsMap
+    componentsMap,
 }
 
 export const Relationships = Template.bind({})
@@ -57,44 +57,44 @@ Relationships.args = {
         single_organization: null,
         single_person: null,
         single_document: null,
-        single_taxon: null
+        single_taxon: null,
     },
     schema: relationshipsSchema,
-    componentsMap
+    componentsMap,
 }
 
 export const FieldsWithDescription = Template.bind({})
 FieldsWithDescription.args = {
     data: defaultData,
     schema: fieldsWithDescriptionSchema,
-    componentsMap
+    componentsMap,
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
     data: {
         nom: 'Doe',
-        adresse_e_mail: 'john.doe@gmail.com'
+        adresse_e_mail: 'john.doe@gmail.com',
     },
     schema: disabledSchema,
     disabled: true,
-    componentsMap
+    componentsMap,
 }
 
 export const DefaultData = Template.bind({})
 DefaultData.args = {
     data: {
         nom: 'Doe',
-        adresse_e_mail: 'john.doe@gmail.com'
+        adresse_e_mail: 'john.doe@gmail.com',
     },
     schema: defaultSchema,
-    componentsMap
+    componentsMap,
 }
 
 export const FetchSchema = Template.bind({})
 FetchSchema.args = {
     schema: '/api/custom_forms/2/definition',
-    componentsMap
+    componentsMap,
 }
 
 export const Errors = Template.bind({})
@@ -109,50 +109,50 @@ Errors.args = {
                 data: {
                     errorsPerForm: {
                         date: {
-                            date: 'date error'
+                            date: 'date error',
                         },
                         date_and_time: {
-                            date_and_time: 'date and time error'
+                            date_and_time: 'date and time error',
                         },
                         text: {
-                            text: 'text error'
+                            text: 'text error',
                         },
                         textarea: {
-                            textarea: 'textarea error'
+                            textarea: 'textarea error',
                         },
                         markdown: {
-                            markdown: 'markdown error'
+                            markdown: 'markdown error',
                         },
                         boolean: {
-                            boolean: 'boolean error'
+                            boolean: 'boolean error',
                         },
                         number_int: {
-                            number_int: 'number_int error'
+                            number_int: 'number_int error',
                         },
                         number_float: {
-                            number_float: 'number_float error'
+                            number_float: 'number_float error',
                         },
                         email: {
-                            email: 'email error'
+                            email: 'email error',
                         },
                         choice_single: {
-                            choice_single: 'choice_single error'
+                            choice_single: 'choice_single error',
                         },
                         choice_single_extended: {
-                            choice_single_extended: 'choice_single_extended error'
+                            choice_single_extended: 'choice_single_extended error',
                         },
                         choice_multiple: {
-                            choice_multiple: 'choice_multiple error'
+                            choice_multiple: 'choice_multiple error',
                         },
                         choice_multiple_extended: {
-                            choice_multiple_extended: 'choice_multiple_extended error'
+                            choice_multiple_extended: 'choice_multiple_extended error',
                         },
                         documents: {
-                            documents: 'documents error'
-                        }
-                    }
-                }
-            }
+                            documents: 'documents error',
+                        },
+                    },
+                },
+            },
         })
-    }
+    },
 }

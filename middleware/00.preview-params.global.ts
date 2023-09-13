@@ -1,4 +1,4 @@
-import {defineNuxtRouteMiddleware} from '#app'
+import { defineNuxtRouteMiddleware } from '#app'
 
 /*
  * This middleware is used to set preview mode from query parameters.
@@ -9,7 +9,7 @@ export default defineNuxtRouteMiddleware((to) => {
     if (to.query?._preview === '1' && to.query?.token) {
         previewState.value = {
             preview: true,
-            previewToken: to.query.token as string
+            previewToken: to.query.token as string,
         }
     }
 })

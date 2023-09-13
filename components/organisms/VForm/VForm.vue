@@ -1,10 +1,5 @@
 <template>
-    <form
-        v-if="formattedSchema"
-        :id="id"
-        :method="method"
-        @submit="onSubmit"
-    >
+    <form v-if="formattedSchema" :id="id" :method="method" @submit="onSubmit">
         <slot name="beforeFields" />
         <v-form-element-factory
             :id="id"
@@ -16,24 +11,10 @@
         />
         <footer class="form__footer">
             <div class="actions">
-                <p
-                    v-if="errorMessage"
-                    type="error"
-                    class="errors"
-                    :title="$t(errorMessage)"
-                />
-                <p
-                    v-if="isSuccess"
-                    :title="successLabel || $t('form.success')"
-                    type="success"
-                    class="success"
-                />
+                <p v-if="errorMessage" type="error" class="errors" :title="$t(errorMessage)" />
+                <p v-if="isSuccess" :title="successLabel || $t('form.success')" type="success" class="success" />
                 <slot name="submitButton" :can-submit="canSubmit" :disabled="isDisabled" :label="submitButtonLabel">
-                    <button
-                        v-if="canSubmit"
-                        :disabled="isDisabled"
-                        class="actions__button"
-                    >
+                    <button v-if="canSubmit" :disabled="isDisabled" class="actions__button">
                         {{ submitButtonLabel }}
                     </button>
                 </slot>
@@ -56,8 +37,8 @@ import { useNuxtApp } from '#app'
 import { useI18n } from '#imports'
 import VFormElementFactory from '~/components/organisms/VForm/VFormElementFactory'
 import { JsonSchemaExtended } from '~/types/json-schema'
-import {ComponentsMap} from "~/utils/form/create-form-children";
-import {Violation} from "~/utils/form/form-element";
+import { ComponentsMap } from '~/utils/form/create-form-children'
+import { Violation } from '~/utils/form/form-element'
 
 interface FormSubmitParams {
     action?: string
@@ -69,69 +50,69 @@ interface FormDataEvent extends Event {
     readonly formData: FormData
 }
 
-export type SubmitFunction = ((arg: FormSubmitParams) => Promise<void>)
+export type SubmitFunction = (arg: FormSubmitParams) => Promise<void>
 
-const { $toasts } = useNuxtApp()
-const { t } = useI18n()
+// const { $toasts } = useNuxtApp()
+// const { t } = useI18n()
 const emit = defineEmits(['submit', 'update:modelValue'])
 
 const props = defineProps({
     modelValue: {
         type: Object as PropType<Record<string, any>>,
-        required: true
+        required: true,
     },
     schema: {
         type: [Object, String] as PropType<JsonSchemaExtended | string>,
-        required: true
+        required: true,
     },
     componentsMap: {
         type: Object as PropType<ComponentsMap>,
-        required: true
+        required: true,
     },
     method: {
         type: String,
-        default: 'post'
+        default: 'post',
     },
     action: {
         type: String,
-        default: () => ''
+        default: () => '',
     },
     disabled: {
         type: Boolean,
-        default: false
+        default: false,
     },
     allowSubmittingAgain: {
         type: Boolean,
-        default: true
+        default: true,
     },
     gdpr: {
         type: Boolean,
-        default: true
+        default: true,
     },
     submitLabel: {
         type: String,
-        default: undefined
+        default: undefined,
     },
     pendingLabel: {
         type: String,
-        default: undefined
+        default: undefined,
     },
     successLabel: {
         type: String,
-        default: undefined
+        default: undefined,
     },
     errorLabel: {
         type: String,
-        default: undefined
+        default: undefined,
     },
     submitCallback: {
         type: Function as PropType<SubmitFunction>,
         required: false,
-        default: undefined
+        default: undefined,
     },
     id: {
         type: String,
-        default: undefined
+        default: undefined,
     },
 })
 
@@ -140,16 +121,16 @@ const data = reactive({
     isSuccess: false,
     error: null as FetchError | null,
     internalData: {},
-    loadedSchema: null as null | JsonSchemaExtended
+    loadedSchema: null as null | JsonSchemaExtended,
 })
 
 const value = computed({
-    get () {
+    get() {
         return props.modelValue
     },
-    set (value) {
+    set(value) {
         emit('update:modelValue', value)
-    }
+    },
 })
 
 const isSuccess = computed(() => data.isSuccess)
@@ -159,7 +140,9 @@ const rawSchema = computed((): JsonSchemaExtended | undefined | null => {
     return typeof props.schema === 'object' ? props.schema : data.loadedSchema
 })
 const formattedSchema = computed((): JsonSchemaExtended | undefined | null => {
-    if (!rawSchema.value) { return }
+    if (!rawSchema.value) {
+        return
+    }
 
     const schema = Object.assign({}, rawSchema.value)
 
@@ -176,9 +159,7 @@ const isDisabled = computed((): boolean => {
     return props.disabled || data.isPending
 })
 const submitButtonLabel = computed((): string => {
-    return (data.isPending)
-        ? (props.pendingLabel || 'form.pending')
-        : (props.submitLabel || 'form.submit')
+    return data.isPending ? props.pendingLabel || 'form.pending' : props.submitLabel || 'form.submit'
 })
 
 const errorsPerProperty = computed((): Violation[] => {
@@ -209,13 +190,15 @@ const errorMessage = computed((): string | null => {
 })
 
 const defaultSubmitCallback: SubmitFunction = (): Promise<void> => {
-    return new Promise(resolve => resolve())
+    return new Promise((resolve) => resolve())
 }
 
 const onSubmit = async (event: FormDataEvent): Promise<void> => {
     emit('submit', event)
 
-    if (event.defaultPrevented) { return }
+    if (event.defaultPrevented) {
+        return
+    }
 
     event.preventDefault()
 
@@ -226,14 +209,14 @@ const onSubmit = async (event: FormDataEvent): Promise<void> => {
     data.isPending = true
     data.error = null
 
-    const submitCallback = (props.submitCallback || defaultSubmitCallback)
+    const submitCallback = props.submitCallback || defaultSubmitCallback
     const submitObject = { action, formData } as FormSubmitParams
 
     await submitCallback(submitObject)
         .then(() => {
             data.isSuccess = true
         })
-        .catch(async (error: FetchError) => {
+        .catch((error: FetchError) => {
             captureException(error)
             data.isSuccess = false
             data.error = error
@@ -251,6 +234,6 @@ footer {
     margin: 1em 0;
 }
 .success {
-     margin: 1em 0;
- }
+    margin: 1em 0;
+}
 </style>

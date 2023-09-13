@@ -1,6 +1,6 @@
-import {JsonLdObject} from '@roadiz/abstract-api-client/dist/types/jsonld'
-import {EventsApi} from '~/types/event'
-import {$Img} from "@nuxt/image";
+import { JsonLdObject } from '@roadiz/abstract-api-client/dist/types/jsonld'
+import { $Img } from '@nuxt/image'
+import { EventsApi } from '~/types/event'
 
 export interface StructuredDataJsonLd {
     '@type': string
@@ -104,7 +104,7 @@ function getDataValues(
     data: JsonLdObject,
     type: string,
     img: $Img,
-    properties?: PropertiesOptions
+    properties?: PropertiesOptions,
 ): Record<string, unknown> {
     const result: Record<string, unknown> = {}
 
@@ -123,7 +123,7 @@ function getStructuredDataEntry(
     data: JsonLdObject,
     type: string,
     img: $Img,
-    properties?: PropertiesOptions
+    properties?: PropertiesOptions,
 ): StructuredDataJsonLd {
     return {
         '@type': type,
@@ -136,7 +136,7 @@ function getEventStructuredDataEntry(
     event: EventsApi.Event,
     img: $Img,
     properties?: PropertiesOptions,
-    date?: EventsApi.EventDate
+    date?: EventsApi.EventDate,
 ): StructuredDataJsonLd {
     const entry = getStructuredDataEntry(event, Type.EVENT, img, properties)
     const dateValues = date && getDataValues(date, Type.EVENT, img, properties)
@@ -147,7 +147,7 @@ function getEventStructuredDataEntry(
 function getEventStructuredData(
     event: EventsApi.Event,
     img: $Img,
-    properties?: PropertiesOptions
+    properties?: PropertiesOptions,
 ): StructuredDataJsonLd | StructuredDataJsonLd[] | void {
     if (event.dates && event.dates.length > 1) {
         return event.dates.map((date) => getEventStructuredDataEntry(event, img, properties, date))
@@ -159,7 +159,7 @@ function getEventStructuredData(
 export function getStructuredData(
     data: JsonLdObject,
     img: $Img,
-    properties?: PropertiesOptions
+    properties?: PropertiesOptions,
 ): StructuredDataJsonLd | StructuredDataJsonLd[] | void {
     const type = data['@type']
 

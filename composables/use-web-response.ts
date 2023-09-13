@@ -1,16 +1,13 @@
-import {Ref} from "@vue/reactivity";
-import {RoadizAlternateLink, RoadizNodesSources} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import {joinURL} from "ufo";
-import {Link, Meta, Script} from "@unhead/schema";
-import {CommonContent, PageResponse} from "~/types/api";
-import {EventsApi} from "~/types/event";
-import {getStructuredData} from "~/utils/seo/get-structured-data";
-import {isEventEntity} from "~/utils/roadiz/entity";
+import { Ref } from 'vue'
+import { RoadizAlternateLink, RoadizNodesSources } from '@roadiz/abstract-api-client/dist/types/roadiz'
+import { joinURL } from 'ufo'
+import { Link, Meta, Script } from '@unhead/schema'
+import { CommonContent, PageResponse } from '~/types/api'
+import { EventsApi } from '~/types/event'
+import { getStructuredData } from '~/utils/seo/get-structured-data'
+import { isEventEntity } from '~/utils/roadiz/entity'
 
-export default function (
-    pageResponse: Ref<PageResponse | null>,
-    commonContents: Ref<CommonContent>
-){
+export default function (pageResponse: Ref<PageResponse | null>, commonContents: Ref<CommonContent>) {
     const img = useImage()
     const runtimeConfig = useRuntimeConfig()
 
@@ -18,7 +15,7 @@ export default function (
         return pageResponse.value?.webResponse
     })
     const pageType = computed(() => {
-        return pageResponse.value?.webResponse?.item?.["@type"]
+        return pageResponse.value?.webResponse?.item?.['@type']
     })
     const page = computed(() => {
         return pageResponse.value?.webResponse?.item
@@ -107,7 +104,7 @@ export default function (
                 hid: 'twitter:url',
                 name: 'twitter:url',
                 content: url || '',
-            }
+            },
         ]
 
         if ((page.value as RoadizNodesSources)?.noIndex || preview.value.preview) {
@@ -129,19 +126,16 @@ export default function (
     }
 
     const getHeadLinks = (): Link[] => {
-        const links: Link[] = [
-            { rel: 'canonical', href: joinURL(runtimeConfig.public.baseUrl, page.value?.url || '') },
-        ]
+        const links: Link[] = [{ rel: 'canonical', href: joinURL(runtimeConfig.public.baseUrl, page.value?.url || '') }]
         // alternate links
-        const alternateLinksHead =
-            alternateLinks.value?.map((alternateLink: RoadizAlternateLink) => {
-                return {
-                    hid: `alternate-${alternateLink.locale}`,
-                    rel: 'alternate',
-                    hreflang: alternateLink.locale,
-                    href: joinURL(runtimeConfig.public.baseUrl, alternateLink.url),
-                }
-            })
+        const alternateLinksHead = alternateLinks.value?.map((alternateLink: RoadizAlternateLink) => {
+            return {
+                hid: `alternate-${alternateLink.locale}`,
+                rel: 'alternate',
+                hreflang: alternateLink.locale,
+                href: joinURL(runtimeConfig.public.baseUrl, alternateLink.url),
+            }
+        })
         if (alternateLinksHead) links.push(...alternateLinksHead)
 
         return links
@@ -170,7 +164,7 @@ export default function (
         const matomoTagManagerUrl = runtimeConfig.public?.matomo?.url
         const matomoTagManagerId = runtimeConfig.public?.matomo?.containerId
         if (matomoTagManagerId && matomoTagManagerUrl) {
-            const hid = 'matomoTagManager'
+            // const hid = 'matomoTagManager'
 
             scripts.push({
                 type: 'application/javascript',

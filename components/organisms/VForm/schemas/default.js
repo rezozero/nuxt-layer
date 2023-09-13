@@ -51,23 +51,18 @@ export default {
         votre_demande_concerne: {
             items: {
                 type: 'string',
-                enum: [
-                    'Un événement d\'entreprise',
-                    'Le mécénat',
-                    'La soirée de Gala de l\'Opéra de Lyon',
-                    'Autre'
-                ],
+                enum: ["Un événement d'entreprise", 'Le mécénat', "La soirée de Gala de l'Opéra de Lyon", 'Autre'],
                 enum_titles: [
-                    'Un événement d\'entreprise',
+                    "Un événement d'entreprise",
                     'Le mécénat',
-                    'La soirée de Gala de l\'Opéra de Lyon',
+                    "La soirée de Gala de l'Opéra de Lyon",
                     'Autre',
                 ],
                 options: {
                     enum_titles: [
-                        'Un événement d\'entreprise',
+                        "Un événement d'entreprise",
                         'Le mécénat',
-                        'La soirée de Gala de l\'Opéra de Lyon',
+                        "La soirée de Gala de l'Opéra de Lyon",
                         'Autre',
                     ],
                 },

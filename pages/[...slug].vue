@@ -1,13 +1,15 @@
 <template>
-    <h1><nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link></h1>
+    <h1>
+        <nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link>
+    </h1>
 
     <nav>
         <p>i18n Locale: {{ locale }}</p>
         <ul>
             <li v-for="alternateLink in alternateLinks">
-                <nuxt-link
-                        v-if="alternateLink.locale !== page?.translation?.locale"
-                        :to="alternateLink.url">{{ alternateLink.title }}</nuxt-link>
+                <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{
+                    alternateLink.title
+                }}</nuxt-link>
                 <span v-else>{{ alternateLink.title }}</span>
             </li>
         </ul>
@@ -25,12 +27,12 @@
     <h1 v-if="title">{{ title }}</h1>
     <v-block-factory :blocks="blocks"></v-block-factory>
     <v-article-container v-if="articleContainer" :article-container="page" />
-<!--  Example v-form with modelValue  -->
+    <!--  Example v-form with modelValue  -->
     <v-form
         v-if="pageEntity"
+        v-model="formData"
         :components-map="defaultComponentsMap"
         :schema="formSchema"
-        v-model="formData"
         @submit="onFormSubmit"
     ></v-form>
 
@@ -46,14 +48,14 @@
     </footer>
 </template>
 <script setup lang="ts">
-import {RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
-import {HydraError, PageResponse} from "~/types/api";
-import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
-import VArticleContainer from "~/components/organisms/VArticleContainer/VArticleContainer.vue";
-import VForm from "~/components/organisms/VForm/VForm.vue";
-import defaultSchema from "~/components/organisms/VForm/schemas/all-fields.js";
-import VBreadcrumbs from "~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue";
+import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
+import VBlockFactory from '~/components/organisms/VBlockFactory/VBlockFactory'
+import { HydraError, PageResponse } from '~/types/api'
+import { isArticleContainerEntity, isPageEntity } from '~/utils/roadiz/entity'
+import VArticleContainer from '~/components/organisms/VArticleContainer/VArticleContainer.vue'
+import VForm from '~/components/organisms/VForm/VForm.vue'
+import defaultSchema from '~/components/organisms/VForm/schemas/all-fields.js'
+import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 
 const { $webResponseFetch } = useNuxtApp()
 const { t, locale, setLocale } = useI18n()
@@ -65,7 +67,7 @@ const pagePath = computed(() => {
 
 const { data: fetchResponse } = await useAsyncData<PageResponse>(
     'web_response',
-    async (): Promise<PageResponse> => await $webResponseFetch(pagePath.value)
+    async (): Promise<PageResponse> => await $webResponseFetch(pagePath.value),
 )
 if (!fetchResponse.value) {
     /*
@@ -91,7 +93,7 @@ const {
     getHeadMeta,
     getHeadLinks,
     getHeadScripts,
-    breadcrumbs
+    breadcrumbs,
 } = useWebResponse(fetchResponse, useCommonContents())
 
 useHead({

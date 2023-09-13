@@ -1,10 +1,5 @@
 <template>
-    <fieldset
-        :disabled="disabled"
-        class="fieldset"
-        :class="$style.root"
-        :name="name"
-    >
+    <fieldset :disabled="disabled" class="fieldset" :class="$style.root" :name="name">
         <legend v-if="label" class="fieldset__legend">
             {{ label }}
         </legend>
@@ -13,9 +8,7 @@
                 {{ description }}
             </div>
         </div>
-        <div
-            class="fieldset__element"
-        >
+        <div class="fieldset__element">
             <v-form-element-factory
                 :id="id"
                 v-model="value"
@@ -33,50 +26,50 @@ import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { JsonSchemaExtended } from '~/types/json-schema'
 import VFormElementFactory from '~/components/organisms/VForm/VFormElementFactory'
-import {defaultProps, Violation} from "~/utils/form/form-element";
-import {ComponentsMap} from "~/utils/form/create-form-children";
+import { defaultProps, Violation } from '~/utils/form/form-element'
+import { ComponentsMap } from '~/utils/form/create-form-children'
 
 const props = defineProps({
     ...defaultProps,
     modelValue: {
         type: Object as PropType<Record<string, unknown>>,
         required: false,
-        default: () => {}
+        default: () => {},
     },
     schema: {
         type: Object as PropType<JsonSchemaExtended>,
-        required: true
+        required: true,
     },
     errors: {
         type: Array as PropType<Violation[]>,
-        default: undefined
+        default: undefined,
     },
     componentsMap: {
         type: Object as PropType<ComponentsMap>,
-        required: true
+        required: true,
     },
     schemaKey: {
         type: String,
-        required: true
+        required: true,
     },
     virtual: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     id: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 })
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
-    get () {
+    get() {
         return props.modelValue
     },
-    set (value) {
+    set(value) {
         emit('update:modelValue', value)
-    }
+    },
 })
 
 const internalParents = computed((): string[] => {

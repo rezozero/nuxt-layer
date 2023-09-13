@@ -1,6 +1,6 @@
 export interface PreviewState {
-    preview: boolean,
-    previewToken: string | undefined,
+    preview: boolean
+    previewToken: string | undefined
 }
 
 export default function () {

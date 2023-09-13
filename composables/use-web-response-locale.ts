@@ -1,5 +1,5 @@
 export interface WebResponseLocaleState {
-    locale: string | undefined,
+    locale: string | undefined
 }
 
 export default function () {

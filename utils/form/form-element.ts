@@ -7,17 +7,17 @@ export interface Violation {
 }
 
 export interface FormElementProps {
-    id?: String,
-    required?: Boolean,
-    errors?: Violation[] | undefined,
-    label?: String,
-    name?: String,
-    disabled?: Boolean,
-    hideSeparator?: Boolean,
-    description?: String,
-    autocomplete?: String,
-    placeholder?: String,
-    parents?: string[],
+    id?: String
+    required?: Boolean
+    errors?: Violation[] | undefined
+    label?: String
+    name?: String
+    disabled?: Boolean
+    hideSeparator?: Boolean
+    description?: String
+    autocomplete?: String
+    placeholder?: String
+    parents?: string[]
 }
 
 export const defaultProps = {

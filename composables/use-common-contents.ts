@@ -1,4 +1,4 @@
-import {CommonContent} from "~/types/api";
+import { CommonContent } from '~/types/api'
 
 /*
  * useCommonContents is a composable function that returns a reactive state

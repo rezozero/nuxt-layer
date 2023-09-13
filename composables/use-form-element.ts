@@ -1,4 +1,4 @@
-import {FormElementProps} from "~/utils/form/form-element";
+import { FormElementProps } from '~/utils/form/form-element'
 
 export default function (props: FormElementProps) {
     const id = computed(() => props.id)

@@ -1,12 +1,12 @@
-import {SitemapStream, streamToPromise} from 'sitemap'
-import {HydraCollection} from "@roadiz/abstract-api-client/dist/types/hydra";
-import {RoadizNodesSources, RoadizTranslation} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import {NitroRuntimeConfig} from "nitropack";
+import { SitemapStream, streamToPromise } from 'sitemap'
+import { HydraCollection } from '@roadiz/abstract-api-client/dist/types/hydra'
+import { RoadizNodesSources, RoadizTranslation } from '@roadiz/abstract-api-client/dist/types/roadiz'
+import { NitroRuntimeConfig } from 'nitropack'
 
 const fetchAllUrlsForLocale = async (
     runtimeConfig: NitroRuntimeConfig,
     _locale = 'fr',
-    noIndex: boolean | undefined = false
+    noIndex: boolean | undefined = false,
 ): Promise<Array<string>> => {
     let page = 1
     let active = true
@@ -16,7 +16,7 @@ const fetchAllUrlsForLocale = async (
         const data = await $fetch<HydraCollection<RoadizNodesSources>>('/nodes_sources', {
             headers: {
                 'accept-encoding': 'gzip, deflate',
-                Accept: 'application/ld+json'
+                Accept: 'application/ld+json',
             },
             params: {
                 'node.nodeType.reachable': true,
@@ -25,7 +25,7 @@ const fetchAllUrlsForLocale = async (
                 page,
                 _locale,
             },
-            baseURL: runtimeConfig.public.apiBaseUrl
+            baseURL: runtimeConfig.public.apiBaseUrl,
         })
         if (data && data['hydra:member'] && data['hydra:totalItems']) {
             data['hydra:member'].forEach((entry): void => {
@@ -44,16 +44,16 @@ const fetchAllUrlsForLocale = async (
 export default defineEventHandler(async () => {
     const runtimeConfig = useRuntimeConfig()
     const sitemap = new SitemapStream({
-        hostname: runtimeConfig.public.baseUrl
+        hostname: runtimeConfig.public.baseUrl,
     })
 
     sitemap.write({
-        url: '/'
+        url: '/',
     })
 
     const data = await $fetch<HydraCollection<RoadizTranslation>>('/translations', {
         params: { available: true },
-        baseURL: runtimeConfig.public.apiBaseUrl
+        baseURL: runtimeConfig.public.apiBaseUrl,
     })
     const locales = data['hydra:member'].map(({ locale }) => locale)
 
@@ -61,7 +61,7 @@ export default defineEventHandler(async () => {
         const urls = await fetchAllUrlsForLocale(runtimeConfig, locale)
         urls.forEach((url) => {
             sitemap.write({
-                url
+                url,
             })
         })
     })

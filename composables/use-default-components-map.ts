@@ -1,9 +1,9 @@
-import {ComponentsMap} from "~/utils/form/create-form-children";
-import VHiddenInput from "~/components/atoms/VHiddenInput/VHiddenInput.vue";
-import VInputList from "~/components/molecules/VInputList/VInputList.vue";
-import VInput from "~/components/molecules/VInput/VInput.vue";
-import VTextarea from "~/components/molecules/VTextarea/VTextarea.vue";
-import VSelect from "~/components/organisms/VSelect/VSelect.vue";
+import { ComponentsMap } from '~/utils/form/create-form-children'
+import VHiddenInput from '~/components/atoms/VHiddenInput/VHiddenInput.vue'
+import VInputList from '~/components/molecules/VInputList/VInputList.vue'
+import VInput from '~/components/molecules/VInput/VInput.vue'
+import VTextarea from '~/components/molecules/VTextarea/VTextarea.vue'
+import VSelect from '~/components/organisms/VSelect/VSelect.vue'
 
 export default function (): ComponentsMap {
     return {

@@ -6,14 +6,21 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@types/json-schema": "^7.0.12",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "include-media": "^2.0.0",
     "nuxt": "^3.7.0",
-    "sass": "^1.66.1"
+    "prettier": "^3.0.3",
+    "sass": "^1.66.1",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@nuxt/image": "^1.0.0-rc.1",
