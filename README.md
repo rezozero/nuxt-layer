@@ -19,7 +19,7 @@
 - [ ] Storybook integration
 - [ ] Themeable and ThemeProvider composables
 - [ ] HTTP cache middleware
-- [ ] eslint configuration
+- [x] eslint configuration
 - [ ] CI/CD configuration
 - [ ] Docker configuration
 - [ ] SCSS configuration
