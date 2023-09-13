@@ -6,7 +6,7 @@ const defaultLocale = 'en'
 export default defineNuxtConfig({
   devtools: { enabled: true },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/scss/main.scss'],
+  css: ['~/assets/scss/main.scss'],
   modules: [
     '@nuxt/image',
     '@nuxtjs/i18n',
