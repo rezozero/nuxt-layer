@@ -1,52 +1,55 @@
 <template>
-    <h1>
-        <nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link>
-    </h1>
+    <div>
+        <h1>
+            <nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link>
+        </h1>
 
-    <nav>
-        <p>i18n Locale: {{ locale }}</p>
-        <ul>
-            <li v-for="alternateLink in alternateLinks">
-                <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{
-                    alternateLink.title
-                }}</nuxt-link>
-                <span v-else>{{ alternateLink.title }}</span>
-            </li>
-        </ul>
-    </nav>
-
-    <nav v-if="mainMenuWalker">
-        <p>Main menu</p>
-        <ul>
-            <li v-for="subWalker in mainMenuWalker.children">
-                <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
-            </li>
-        </ul>
-    </nav>
-    <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />
-    <h1 v-if="title">{{ title }}</h1>
-    <v-block-factory :blocks="blocks"></v-block-factory>
-    <v-article-container v-if="articleContainer" :article-container="page" />
-    <!--  Example v-form with modelValue  -->
-    <v-form
-        v-if="pageEntity"
-        v-model="formData"
-        :components-map="defaultComponentsMap"
-        :schema="formSchema"
-        @submit="onFormSubmit"
-    ></v-form>
-
-    <footer>
-        <nav v-if="footerMenuWalker">
-            <p>Footer menu</p>
+        <nav>
+            <p>i18n Locale: {{ locale }}</p>
             <ul>
-                <li v-for="subWalker in footerMenuWalker.children">
+                <li v-for="(alternateLink, index) in alternateLinks" :key="index">
+                    <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{
+                        alternateLink.title
+                    }}</nuxt-link>
+                    <span v-else>{{ alternateLink.title }}</span>
+                </li>
+            </ul>
+        </nav>
+
+        <nav v-if="mainMenuWalker">
+            <p>Main menu</p>
+            <ul>
+                <li v-for="(subWalker, index) in mainMenuWalker.children" :key="index">
                     <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
                 </li>
             </ul>
         </nav>
-    </footer>
+        <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />
+        <h1 v-if="title">{{ title }}</h1>
+        <v-block-factory :blocks="blocks"></v-block-factory>
+        <v-article-container v-if="articleContainer" :article-container="page" />
+        <!--  Example v-form with modelValue  -->
+        <v-form
+            v-if="pageEntity"
+            v-model="formData"
+            :components-map="defaultComponentsMap"
+            :schema="formSchema"
+            @submit="onFormSubmit"
+        ></v-form>
+
+        <footer>
+            <nav v-if="footerMenuWalker">
+                <p>Footer menu</p>
+                <ul>
+                    <li v-for="(subWalker, index) in footerMenuWalker.children" :key="index">
+                        <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
 </template>
+
 <script setup lang="ts">
 import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
 import VBlockFactory from '~/components/organisms/VBlockFactory/VBlockFactory'
@@ -58,7 +61,7 @@ import defaultSchema from '~/components/organisms/VForm/schemas/all-fields.js'
 import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 
 const { $webResponseFetch } = useNuxtApp()
-const { t, locale, setLocale } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 
 const pagePath = computed(() => {
@@ -85,7 +88,7 @@ if (!fetchResponse.value) {
 
 const {
     page,
-    locale: webResponseLocale,
+    // locale: webResponseLocale,
     metaTitle,
     title,
     blocks,

@@ -79,7 +79,7 @@ export const apiFetchFactory = () => {
     const baseURL = runtimeConfig.public.apiBaseUrl
 
     return $fetch.create({
-        async onRequest({ request, options }) {
+        onRequest({ request, options }) {
             /*
              * Add preview token to every request if preview mode is enabled.
              */
@@ -106,7 +106,7 @@ export const apiFetchFactory = () => {
                 }
             }
         },
-        async onResponseError({ request, response, options }) {
+        onResponseError({ request, response }) {
             const lastApiFetchError = useLastApiFetchError()
             lastApiFetchError.value = {
                 statusCode: response.status,

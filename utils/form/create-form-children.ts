@@ -1,4 +1,4 @@
-import { ComponentOptionsBase, h, VNode, VNodeChild } from 'vue'
+import { ComponentOptionsBase, h, VNodeChild } from 'vue'
 import { JsonSchemaExtended } from '~/types/json-schema'
 import { FactoryPropsTypes } from '~/components/organisms/VForm/VFormElementFactory'
 import VFormFieldset from '~/components/organisms/VForm/VFormFieldset.vue'
