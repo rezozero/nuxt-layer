@@ -47,7 +47,6 @@
 </template>
 <script setup lang="ts">
 import {RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import useWebResponse from "~/composables/use-web-response";
 import VBlockFactory from "~/components/organisms/VBlockFactory/VBlockFactory";
 import {HydraError, PageResponse} from "~/types/api";
 import {isArticleContainerEntity, isPageEntity} from "~/utils/roadiz/entity";
