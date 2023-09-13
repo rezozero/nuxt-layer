@@ -2,9 +2,9 @@
     <p>BasicBlock: {{ title }}</p>
 </template>
 <script setup lang="ts">
-import {PropType} from "vue";
-import {RoadizWalker} from "@roadiz/abstract-api-client/dist/types/roadiz";
-import useBlock from "~/composables/use-block";
+import { PropType } from 'vue'
+import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
+import useBlock from '~/composables/use-block'
 
 const props = defineProps({
     walker: Object as PropType<RoadizWalker>,
@@ -12,9 +12,5 @@ const props = defineProps({
     numBlocks: Number,
 })
 
-const {
-    item,
-    title
-} = useBlock(props.walker)
-
+const { item, title } = useBlock(props.walker)
 </script>

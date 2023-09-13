@@ -1,10 +1,10 @@
 <template>
-    <input type="hidden" :id="id" :name="name" :value="modelValue" />
+    <input :id="id" type="hidden" :name="name" :value="modelValue" />
 </template>
 
 <script setup lang="ts">
-import {defaultProps} from "~/utils/form/form-element";
-import useFormElement from "~/composables/use-form-element";
+import { defaultProps } from '~/utils/form/form-element'
+import useFormElement from '~/composables/use-form-element'
 
 const props = defineProps({
     ...defaultProps,

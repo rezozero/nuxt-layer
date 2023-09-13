@@ -1,16 +1,12 @@
 <template>
-    <v-field-wrapper :id="id"
-                     :label="label"
-                     :focused="isFocused"
-                     :filled="isFilled"
-                     :required="required">
+    <v-field-wrapper :id="id" :label="label" :focused="isFocused" :filled="isFilled" :required="required">
         <textarea
             v-bind="props"
+            :id="id"
             ref="input"
             v-model="value"
             :required="required"
             :placeholder="placeholder"
-            :id="id"
             :name="name"
             :disabled="disabled"
             :class="$style.textarea"
@@ -21,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import VFieldWrapper from "~/components/molecules/VFieldWrapper/VFieldWrapper.vue";
-import {defaultProps} from "~/utils/form/form-element";
+import VFieldWrapper from '~/components/molecules/VFieldWrapper/VFieldWrapper.vue'
+import { defaultProps } from '~/utils/form/form-element'
 
 const props = defineProps({
     ...defaultProps,

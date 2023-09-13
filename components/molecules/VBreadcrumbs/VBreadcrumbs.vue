@@ -1,5 +1,5 @@
 <template>
-    <nav aria-label="Breadcrumb" class="breadcrumb" v-if="breadcrumbs?.items.length">
+    <nav v-if="breadcrumbs?.items.length" aria-label="Breadcrumb" class="breadcrumb">
         <ol>
             <li v-if="homePage">
                 <nuxt-link :to="homePage.url">{{ homePage.title }}</nuxt-link>
@@ -11,9 +11,10 @@
     </nav>
 </template>
 <script setup lang="ts">
-import {RoadizBreadcrumbs, RoadizNodesSources} from "@roadiz/abstract-api-client/dist/types/roadiz";
+import { RoadizBreadcrumbs, RoadizNodesSources } from '@roadiz/abstract-api-client/dist/types/roadiz'
+import { PropType } from 'vue'
 
-const props = defineProps({
+defineProps({
     breadcrumbs: Object as PropType<RoadizBreadcrumbs>,
     homePage: Object as PropType<RoadizNodesSources>,
 })

@@ -5,15 +5,15 @@
         :inline="isCheckbox || isRadio"
         :required="required"
         :disabled="disabled"
-        :hideSeparator="hideSeparator"
+        :hide-separator="hideSeparator"
         :focused="isFocused"
         :filled="isFilled || prefilled"
     >
         <template v-if="isCheckbox || isRadio" #beforeLabel>
             <input
+                :id="id"
                 ref="input"
                 v-model="value"
-                :id="id"
                 :step="step"
                 :autocomplete="autocomplete"
                 :type="type"
@@ -23,13 +23,13 @@
                 :placeholder="placeholder"
                 @focus="onFocus"
                 @blur="onBlur"
-            >
+            />
         </template>
-        <template #default v-else>
+        <template v-else #default>
             <input
+                :id="id"
                 ref="input"
                 v-model="value"
-                :id="id"
                 :step="step"
                 :autocomplete="autocomplete"
                 :type="type"
@@ -39,14 +39,14 @@
                 :placeholder="placeholder"
                 @focus="onFocus"
                 @blur="onBlur"
-            >
+            />
         </template>
     </v-field-wrapper>
 </template>
 <script setup lang="ts">
 // import IconCheck from '~/assets/images/icons/check.svg?sprite'
 import VFieldWrapper from '~/components/molecules/VFieldWrapper/VFieldWrapper.vue'
-import {defaultProps} from "~/utils/form/form-element";
+import { defaultProps } from '~/utils/form/form-element'
 
 const props = defineProps({
     ...defaultProps,
@@ -73,5 +73,7 @@ const { isFilled, isFocused, value, onBlur, onFocus } = useTextInput(props, emit
 
 const isCheckbox = computed(() => props.type === 'checkbox')
 const isRadio = computed(() => props.type === 'radio')
-const prefilled = computed(() => props.type === 'date' || props.type === 'datetime-local' || props.type === 'file' || !!props.placeholder)
+const prefilled = computed(
+    () => props.type === 'date' || props.type === 'datetime-local' || props.type === 'file' || !!props.placeholder,
+)
 </script>

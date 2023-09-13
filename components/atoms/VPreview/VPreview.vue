@@ -20,7 +20,7 @@ const jwt = computed(() => {
     }
     const base64Url = token.value.split('.')[1]
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-    if (typeof window != 'undefined' && typeof window.atob != 'undefined') {
+    if (typeof window !== 'undefined' && typeof window.atob !== 'undefined') {
         decodedBase64 = window.atob(base64)
     } else {
         decodedBase64 = Buffer.from(base64, 'base64').toString()
@@ -31,7 +31,7 @@ const jwt = computed(() => {
             .map((c) => {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
             })
-            .join('')
+            .join(''),
     )
     return JSON.parse(jsonPayload)
 })
@@ -41,7 +41,7 @@ const remainingTime = computed(() => {
 const stopPreview = () => {
     preview.value = {
         preview: false,
-        previewToken: undefined
+        previewToken: undefined,
     }
     window.location.reload()
 }

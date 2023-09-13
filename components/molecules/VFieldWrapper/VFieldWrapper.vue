@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import type {PropType} from 'vue'
-import VRequiredMark from "~/components/atoms/VRequiredMark/VRequiredMark.vue";
+import type { PropType } from 'vue'
+import VRequiredMark from '~/components/atoms/VRequiredMark/VRequiredMark.vue'
 
 const style = useCssModule()
 const props = defineProps({

@@ -1,7 +1,7 @@
 <template>
     <v-field-wrapper
-        tag="fieldset"
         :id="id"
+        tag="fieldset"
         :label="false"
         :required="required"
         :description="false"
@@ -28,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import type {PropType} from 'vue'
-import VFieldWrapper from "~/components/molecules/VFieldWrapper/VFieldWrapper.vue";
-import {defaultProps} from "~/utils/form/form-element";
-import VInput from "~/components/molecules/VInput/VInput.vue";
-import VRequiredMark from "~/components/atoms/VRequiredMark/VRequiredMark.vue";
+import type { PropType } from 'vue'
+import VFieldWrapper from '~/components/molecules/VFieldWrapper/VFieldWrapper.vue'
+import { defaultProps } from '~/utils/form/form-element'
+import VInput from '~/components/molecules/VInput/VInput.vue'
+import VRequiredMark from '~/components/atoms/VRequiredMark/VRequiredMark.vue'
 
 export interface InputListOption {
     label?: string

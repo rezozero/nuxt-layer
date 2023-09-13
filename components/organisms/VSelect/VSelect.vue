@@ -1,10 +1,5 @@
 <template>
-    <v-field-wrapper
-        :label="label"
-        :focused="isOpen"
-        :filled="isFilled"
-        :disabled="disabled"
-    >
+    <v-field-wrapper :label="label" :focused="isOpen" :filled="isFilled" :disabled="disabled">
         <select
             :name="name"
             tabindex="-1"
@@ -19,14 +14,16 @@
                 :key="option.value"
                 :value="option.value"
                 :selected="isSelectedOption(option)"
-            >{{ option.label }}</option>
+            >
+                {{ option.label }}
+            </option>
         </select>
     </v-field-wrapper>
 </template>
 <script setup lang="ts">
-import type {PropType} from 'vue'
-import {defaultProps} from "~/utils/form/form-element";
-import VFieldWrapper from "~/components/molecules/VFieldWrapper/VFieldWrapper.vue";
+import type { PropType } from 'vue'
+import { defaultProps } from '~/utils/form/form-element'
+import VFieldWrapper from '~/components/molecules/VFieldWrapper/VFieldWrapper.vue'
 
 export interface SelectOption {
     label: string
@@ -68,7 +65,7 @@ const isSelectedOption = (option: SelectOption): boolean => {
     }
 }
 
-const getSelectValue = (selectElement: HTMLSelectElement): string|string[]|undefined|null => {
+const getSelectValue = (selectElement: HTMLSelectElement): string | string[] | undefined | null => {
     if (multiple.value) {
         const value = [] as string[]
         for (let i = 0; i < selectElement.options.length; i++) {
