@@ -47,7 +47,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const { id, label, name, required, disabled } = useFormElement(props)
+const { label, name, required, disabled } = useFormElement(props)
 const isOpen = ref(false)
 const multiple = computed(() => props.multiple || false)
 const options = computed(() => props.options || [])

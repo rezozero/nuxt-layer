@@ -51,6 +51,8 @@ const props = defineProps({
     },
 })
 
+defineEmits(['input'])
+
 const { id, name, label, description, required, disabled, errors } = useFormElement(props)
 const multiple = computed(() => props.multiple || false)
 const options = computed(() => props.options || [])

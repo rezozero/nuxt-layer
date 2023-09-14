@@ -1,7 +1,7 @@
 <template>
     <p>{{ $t('articlecontainer.title') }}</p>
     <ul>
-        <li v-for="article in articles">
+        <li v-for="article in articles" :key="article.url">
             <nuxt-link :to="article.url">{{ article.title }}</nuxt-link>
         </li>
     </ul>

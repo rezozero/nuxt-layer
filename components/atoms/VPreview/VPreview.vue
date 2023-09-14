@@ -8,7 +8,6 @@
 
 <script setup lang="ts">
 const preview = usePreview()
-const router = useRouter()
 
 const token = computed(() => {
     return preview.value?.previewToken
@@ -46,6 +45,7 @@ const stopPreview = () => {
     window.location.reload()
 }
 </script>
+
 <style lang="scss" module>
 .root {
     position: fixed;

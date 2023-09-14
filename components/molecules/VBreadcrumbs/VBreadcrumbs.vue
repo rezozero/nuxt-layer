@@ -4,7 +4,7 @@
             <li v-if="homePage">
                 <nuxt-link :to="homePage.url">{{ homePage.title }}</nuxt-link>
             </li>
-            <li v-for="breadcrumb in breadcrumbs.items">
+            <li v-for="(breadcrumb, index) in breadcrumbs.items" :key="index">
                 <nuxt-link :to="breadcrumb.url">{{ breadcrumb.title }}</nuxt-link>
             </li>
         </ol>

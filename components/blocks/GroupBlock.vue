@@ -16,5 +16,5 @@ const props = defineProps({
     numBlocks: Number,
 })
 
-const { item, title } = useBlock(props.walker)
+const { title } = useBlock(props.walker)
 </script>
