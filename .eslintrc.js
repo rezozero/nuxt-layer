@@ -11,5 +11,6 @@ module.exports = {
         '@typescript-eslint/ban-ts-ignore': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
         'vue/require-default-prop': 'off', // props could be undefined
+        'vue/padding-line-between-blocks': 'warn',
     },
 }

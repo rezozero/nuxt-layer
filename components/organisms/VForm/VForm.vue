@@ -224,6 +224,7 @@ const onSubmit = async (event: FormDataEvent): Promise<void> => {
         })
 }
 </script>
+
 <style lang="scss" scoped>
 footer {
     margin: 1em 0;

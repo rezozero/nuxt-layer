@@ -10,6 +10,7 @@
         </ol>
     </nav>
 </template>
+
 <script setup lang="ts">
 import { RoadizBreadcrumbs, RoadizNodesSources } from '@roadiz/abstract-api-client/dist/types/roadiz'
 import { PropType } from 'vue'

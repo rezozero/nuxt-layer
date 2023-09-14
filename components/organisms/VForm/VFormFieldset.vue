@@ -79,6 +79,7 @@ const internalParents = computed((): string[] => {
     return (props.parents?.slice() || []).concat([props.schemaKey])
 })
 </script>
+
 <style lang="scss" module>
 .root {
     &:not(:last-child) {

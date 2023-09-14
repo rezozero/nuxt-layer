@@ -20,6 +20,7 @@
         </select>
     </v-field-wrapper>
 </template>
+
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { defaultProps } from '~/utils/form/form-element'

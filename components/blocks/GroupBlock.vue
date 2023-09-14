@@ -4,6 +4,7 @@
         <v-block-factory :blocks="walker?.children"></v-block-factory>
     </div>
 </template>
+
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'

@@ -43,6 +43,7 @@
         </template>
     </v-field-wrapper>
 </template>
+
 <script setup lang="ts">
 // import IconCheck from '~/assets/images/icons/check.svg?sprite'
 import VFieldWrapper from '~/components/molecules/VFieldWrapper/VFieldWrapper.vue'
