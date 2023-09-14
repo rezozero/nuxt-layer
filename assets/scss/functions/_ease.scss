@@ -4,7 +4,6 @@
     }
 
     @warn "Unkown '#{$key}' in $ease-curves.";
-
     @return null;
     @return null;
 }

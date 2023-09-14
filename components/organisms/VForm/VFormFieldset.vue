@@ -83,13 +83,14 @@ const internalParents = computed((): string[] => {
 <style lang="scss" module>
 .root {
     &:not(:last-child) {
-        &:after {
-            content: '';
+        &::after {
             width: 100%;
             border-bottom: 1px dashed var(--border-default-grey);
             margin: 0.5rem;
+            content: '';
         }
     }
+
     &:last-child {
         margin-bottom: 0;
 

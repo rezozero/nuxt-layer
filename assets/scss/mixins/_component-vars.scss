@@ -1,5 +1,5 @@
 @mixin component-default-vars($vars, $base: '', $prefix: '', $default: 'm') {
-    @if (map-has-key($vars, $default)) {
+    @if  map-has-key($vars, $default) {
         $default: map-get($vars, $default);
 
         @each $key, $value in $default {
@@ -9,7 +9,7 @@
 }
 
 @mixin component-vars-by-size($vars, $size, $base: '', $prefix: '') {
-    @if (map-has-key($vars, $size)) {
+    @if  map-has-key($vars, $size) {
         $size-vars: map-get($vars, $size);
 
         @each $key, $value in $size-vars {

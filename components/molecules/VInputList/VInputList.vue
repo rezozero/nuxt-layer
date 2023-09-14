@@ -62,7 +62,7 @@ const options = computed(() => props.options || [])
 .root {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgba(0 0 0 / 0.15);
+    border-bottom: 1px solid rgba(0 0 0 / 15%);
     margin-top: rem(30);
 
     &--disabled {
@@ -100,7 +100,7 @@ const options = computed(() => props.options || [])
         left: 30px;
         height: 1px;
         flex-shrink: 0;
-        background-color: rgba(1, 1, 1, 0.15);
+        background-color: rgb(1 1 1 / 15%);
         content: '';
     }
 

@@ -229,9 +229,11 @@ const onSubmit = async (event: FormDataEvent): Promise<void> => {
 footer {
     margin: 1em 0;
 }
+
 .errors {
     margin: 1em 0;
 }
+
 .success {
     margin: 1em 0;
 }

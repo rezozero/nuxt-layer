@@ -3,12 +3,15 @@
 // ⚠️ do not include css file
 
 // vendors
-@import "~include-media/dist/_include-media.scss";
+@import "include-media/dist/_include-media";
 @import "vendors/include-media";
+
 // functions
 @import "functions";
+
 // variables
 @import "variables";
+
 // mixins
 @import "mixins";
 

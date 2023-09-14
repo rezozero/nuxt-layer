@@ -41,6 +41,7 @@ const { isFocused, isFilled, value, onBlur, onFocus } = useTextInput(props, emit
 .textarea {
     //width: 100%;
     min-height: rem(150);
+
     //border: none;
     //font-weight: bold;
 

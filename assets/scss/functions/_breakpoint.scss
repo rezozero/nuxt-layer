@@ -6,7 +6,6 @@
 @function breakpoint($key) {
     @if type-of($breakpoints) != map {
         @warn "$breakpoints is not defined";
-
         @return null;
     }
 
@@ -15,6 +14,5 @@
     }
 
     @warn "Unkown '#{$key}' in $breakpoints.";
-
     @return null;
 }

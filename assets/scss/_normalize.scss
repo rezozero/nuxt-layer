@@ -7,7 +7,7 @@
     Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
     - The "symbol *" and "symbol" part is to solve Firefox SVG sprite bug
  */
-*:where(:not(html, iframe, canvas, img, svg, video, audio, symbol):not(svg *, symbol *)) {
+*:where(:not(html, iframe, canvas, img, svg, video, audio, symbol, svg *, symbol *)) {
     all: unset;
     display: revert;
 }
@@ -41,7 +41,7 @@ table {
 
 /* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
 input, textarea {
-    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 /* revert the 'white-space' property for textarea elements on Safari */
@@ -51,7 +51,7 @@ textarea {
 
 /* minimum style to allow to style meter element */
 meter {
-    -webkit-appearance: revert;
+    appearance: revert;
     appearance: revert;
 }
 
@@ -74,7 +74,7 @@ meter {
     overflow-wrap: break-word;
     -moz-user-modify: read-write;
     -webkit-user-modify: read-write;
-    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 /* apply back the draggable feature - exist only in Chromium and Safari */

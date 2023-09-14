@@ -24,7 +24,6 @@ $v-button: (
         padding: 0 24px
     ),
 );
-
 $v-button-rounded: (
     s: (
         border-radius: math.div(42px, 2)
@@ -49,7 +48,6 @@ $v-button-icon: (
 
 // label
 $v-button-label: ();
-
 $v-button-size-vars-by-variant: map-merge($v-button-size-vars-by-variant, (
     default: (
         (vars: $v-button, prefix: ''),

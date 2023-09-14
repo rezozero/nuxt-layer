@@ -2,11 +2,11 @@
  * Get css vars for a specific size
  */
 @mixin v-button-size($size, $variant: default) {
-    @if (map-has-key($v-button-size-vars-by-variant, $variant)) {
+    @if  map-has-key($v-button-size-vars-by-variant, $variant) {
         $vars: map-get($v-button-size-vars-by-variant, $variant);
 
         @each $value in $vars {
-            @if (map-has-key($value, vars) and map-has-key($value, prefix)) {
+            @if  map-has-key($value, vars) and map-has-key($value, prefix) {
                 @include v-button-css-vars-by-size(map-get($value, vars), $size, map-get($value, prefix));
             }
         }

@@ -50,13 +50,13 @@ const stopPreview = () => {
 .root {
     position: fixed;
     z-index: 9999;
-    bottom: 0;
     right: 1em;
+    bottom: 0;
     display: block;
     padding: 1em 1.5em 0.75em;
     border: 1px solid #e59500;
-    background: #ffa600;
     border-radius: 3px 3px 0 0;
+    background: #ffa600;
     font-size: 10px;
     line-height: 16px;
     opacity: 0.25;

@@ -75,7 +75,7 @@ const classnames = computed(() => [
     pointer-events: none;
     user-select: none;
 
-    //.root--default > .field > & {
+    // .root--default > .field > & {
     //    position: absolute;
     //    top: 0;
     //    display: block;
@@ -98,8 +98,8 @@ const classnames = computed(() => [
         text-decoration: underline;
     }
 
-    //.root--focused:not(.root--inline) &,
-    //.root--filled:not(.root--inline) & {
+    // .root--focused:not(.root--inline) &,
+    // .root--filled:not(.root--inline) & {
     //    opacity: 0.5;
     //    transform: translate3d(0, #{rem(-20)}, 0) scale(0.7);
     //}
