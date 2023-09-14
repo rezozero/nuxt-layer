@@ -7,7 +7,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext .ts,.js,.vue ."
+    "lint": "yarn lint:script && yarn lint:style",
+    "lint:script": "eslint --ext .ts,.js,.vue,.cjs .",
+    "lint:style": "stylelint \"**/*.{vue,css,scss}\""
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -18,8 +20,14 @@
     "eslint-plugin-prettier": "^5.0.0",
     "include-media": "^2.0.0",
     "nuxt": "^3.7.0",
+    "postcss-html": "^1.5.0",
     "prettier": "^3.0.3",
     "sass": "^1.66.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-css-modules": "^4.3.0",
+    "stylelint-config-idiomatic-order": "^9.0.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "stylelint-config-standard-vue": "^1.0.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
