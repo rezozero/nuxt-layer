@@ -14,7 +14,15 @@ export default defineNuxtConfig({
     ],
     plugins: ['./plugins/roadiz-api.ts'],
     // https://github.com/storybook-vue/storybook-nuxt/issues/57
-    // components: [{ path: '~/components/blocks/', global: true }],
+    components: [
+        '~/components/atoms',
+        '~/components/molecules',
+        '~/components/organisms',
+        // TODO: use `global` imports for blocks. For now Storybook trow an error.
+        // @see https://github.com/storybook-vue/storybook-nuxt/issues/57
+        // { path: '~/components/blocks/', global: true },
+        '~/components/blocks',
+    ],
     runtimeConfig: {
         public: {
             baseUrl: 'http://localhost:3000',
