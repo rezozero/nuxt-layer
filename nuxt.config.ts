@@ -5,7 +5,6 @@ const defaultLocale = 'en'
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
-    // Global CSS: https://go.nuxtjs.dev/config-css
     css: ['~/assets/scss/main.scss'],
     modules: [
         '@nuxt/image',
@@ -14,6 +13,7 @@ export default defineNuxtConfig({
         '@storybook-vue/nuxt-storybook',
     ],
     plugins: ['./plugins/roadiz-api.ts'],
+    // https://github.com/storybook-vue/storybook-nuxt/issues/57
     // components: [{ path: '~/components/blocks/', global: true }],
     runtimeConfig: {
         public: {
@@ -27,6 +27,16 @@ export default defineNuxtConfig({
             matomo: {
                 url: 'https://matomo.rezo-zero.com',
                 containerId: undefined,
+            },
+        },
+    },
+    // https://nuxt.com/docs/api/configuration/nuxt-config#vite
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `@import "./assets/scss/_style-resources.scss";`,
+                },
             },
         },
     },
