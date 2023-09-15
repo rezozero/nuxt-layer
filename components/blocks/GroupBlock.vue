@@ -1,7 +1,9 @@
 <template>
-    <p>GroupBlock: {{ title }}</p>
-    <div style="padding-left: 1em">
-        <v-block-factory :blocks="walker?.children"></v-block-factory>
+    <div>
+        <p>GroupBlock: {{ title }}</p>
+        <div style="padding-left: 1em">
+            <v-block-factory :blocks="walker?.children"></v-block-factory>
+        </div>
     </div>
 </template>
 

@@ -7,9 +7,14 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: ['~/assets/scss/main.scss'],
-    modules: ['@nuxt/image', '@nuxtjs/i18n', '@rezo-zero/intervention-request-provider'],
+    modules: [
+        '@nuxt/image',
+        '@nuxtjs/i18n',
+        '@rezo-zero/intervention-request-provider',
+        '@storybook-vue/nuxt-storybook',
+    ],
     plugins: ['./plugins/roadiz-api.ts'],
-    components: [{ path: '~/components/blocks/', global: true }],
+    // components: [{ path: '~/components/blocks/', global: true }],
     runtimeConfig: {
         public: {
             baseUrl: 'http://localhost:3000',
