@@ -16,7 +16,7 @@
 - [ ] Bug: `ArticleContainer` component is instantiated twice on SSR
 - [ ] Bug: i18n locale messages are not loaded on production build
 - [ ] SVG loader
-- [ ] Storybook integration
+- [x] Storybook integration
 - [ ] Themeable and ThemeProvider composables
 - [ ] HTTP cache middleware
 - [x] eslint configuration
