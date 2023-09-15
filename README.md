@@ -22,7 +22,7 @@
 - [x] eslint configuration
 - [ ] CI/CD configuration
 - [ ] Docker configuration
-- [ ] SCSS configuration
+- [x] SCSS configuration
 - [ ] Basic components
 
 ## Examples
