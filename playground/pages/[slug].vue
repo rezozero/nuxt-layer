@@ -52,12 +52,9 @@
 
 <script setup lang="ts">
 import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
-import VBlockFactory from '~/components/organisms/VBlockFactory/VBlockFactory'
-import { HydraError, PageResponse } from '~/types/api'
-import { isArticleContainerEntity, isPageEntity } from '~/utils/roadiz/entity'
-import VArticleContainer from '~/components/organisms/VArticleContainer/VArticleContainer.vue'
-import VForm from '~/components/organisms/VForm/VForm.vue'
-import defaultSchema from '~/components/organisms/VForm/schemas/all-fields.js'
+import { HydraError, PageResponse } from '~layer/types/api'
+import defaultSchema from '~layer/components/organisms/VForm/schemas/all-fields.js'
+import { isArticleContainerEntity, isPageEntity } from '~layer/utils/roadiz/entity'
 import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 
 const { $webResponseFetch } = useNuxtApp()
