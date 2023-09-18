@@ -5,6 +5,7 @@ import {
     RoadizWebResponse,
 } from '@roadiz/abstract-api-client/dist/types/roadiz'
 import { $Fetch, NitroFetchOptions } from 'nitropack'
+import { joinURL } from 'ufo'
 import { CommonContent, PageResponse } from '~/types/api'
 import { EventsApi } from '~/types/event'
 
@@ -76,7 +77,10 @@ const commonHeaders = (opts?: FetchOptions): Record<string, string> => {
 export const apiFetchFactory = () => {
     const runtimeConfig = useRuntimeConfig()
     const headers = commonHeaders({})
-    const baseURL = runtimeConfig.public.apiBaseUrl
+    const baseURL = joinURL(
+        runtimeConfig.public.apiBaseUrl || runtimeConfig.public.baseUrl,
+        (runtimeConfig.public.apiEndpointPrefix as string | undefined) || '',
+    )
 
     return $fetch.create({
         onRequest({ request, options }) {

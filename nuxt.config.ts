@@ -17,7 +17,6 @@ export default defineNuxtConfig({
         '@rezo-zero/intervention-request-provider',
         '@storybook-vue/nuxt-storybook',
     ],
-    plugins: [join(currentDir, './plugins/roadiz-api.ts')],
     // https://github.com/storybook-vue/storybook-nuxt/issues/57
     components: [
         join(currentDir, './components/atoms'),
@@ -31,14 +30,15 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             baseUrl: 'http://localhost:3000',
-            apiBaseUrl: 'http://roadiz-core-app.test/api',
+            apiBaseUrl: '',
+            apiEndpointPrefix: '/api',
             interventionRequest: {
-                baseUrl: 'http://roadiz-core-app.test/assets',
-                noProcessBaseUrl: 'http://roadiz-core-app.test/files',
+                baseUrl: '',
+                noProcessBaseUrl: '',
                 imagesPath: '',
             },
             matomo: {
-                url: 'https://matomo.rezo-zero.com',
+                url: '',
                 containerId: undefined,
             },
         },

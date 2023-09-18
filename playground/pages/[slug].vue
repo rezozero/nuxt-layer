@@ -1,20 +1,20 @@
 <template>
     <div>
-        <h1>
-            <nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link>
-        </h1>
+        <!--        <h1>-->
+        <!--            <nuxt-link v-if="homePage" :to="homePage.url">{{ siteName }}</nuxt-link>-->
+        <!--        </h1>-->
 
-        <nav>
-            <p>i18n Locale: {{ locale }}</p>
-            <ul>
-                <li v-for="(alternateLink, index) in alternateLinks" :key="index">
-                    <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{
-                        alternateLink.title
-                    }}</nuxt-link>
-                    <span v-else>{{ alternateLink.title }}</span>
-                </li>
-            </ul>
-        </nav>
+        <!--        <nav>-->
+        <!--            <p>i18n Locale: {{ locale }}</p>-->
+        <!--            <ul>-->
+        <!--                <li v-for="(alternateLink, index) in alternateLinks" :key="index">-->
+        <!--                    <nuxt-link v-if="alternateLink.locale !== page?.translation?.locale" :to="alternateLink.url">{{-->
+        <!--                        alternateLink.title-->
+        <!--                    }}</nuxt-link>-->
+        <!--                    <span v-else>{{ alternateLink.title }}</span>-->
+        <!--                </li>-->
+        <!--            </ul>-->
+        <!--        </nav>-->
 
         <nav v-if="mainMenuWalker">
             <p>Main menu</p>
@@ -37,90 +37,96 @@
             @submit="onFormSubmit"
         ></v-form>
 
-        <footer>
-            <nav v-if="footerMenuWalker">
-                <p>Footer menu</p>
-                <ul>
-                    <li v-for="(subWalker, index) in footerMenuWalker.children" :key="index">
-                        <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
-                    </li>
-                </ul>
-            </nav>
-        </footer>
+        <!--        <footer>-->
+        <!--            <nav v-if="footerMenuWalker">-->
+        <!--                <p>Footer menu</p>-->
+        <!--                <ul>-->
+        <!--                    <li v-for="(subWalker, index) in footerMenuWalker.children" :key="index">-->
+        <!--                        <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>-->
+        <!--                    </li>-->
+        <!--                </ul>-->
+        <!--            </nav>-->
+        <!--        </footer>-->
     </div>
 </template>
 
 <script setup lang="ts">
 import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
-import { HydraError, PageResponse } from '~layer/types/api'
 import defaultSchema from '~layer/components/organisms/VForm/schemas/all-fields.js'
 import { isArticleContainerEntity, isPageEntity } from '~layer/utils/roadiz/entity'
 import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 
-const { $webResponseFetch } = useNuxtApp()
-const { t, locale } = useI18n()
-const route = useRoute()
+// const { $webResponseFetch } = useNuxtApp()
+// const { t, locale } = useI18n()
+// const route = useRoute()
+//
+// const pagePath = computed(() => {
+//     return route.path
+// })
+//
+// const { data: fetchResponse } = await useAsyncData<PageResponse>(
+//     'web_response',
+//     async (): Promise<PageResponse> => await $webResponseFetch(pagePath.value),
+// )
+// if (!fetchResponse.value) {
+//     /*
+//      * Throw a Nuxt Error using the same statusCode and message as the API response
+//      */
+//     const lastApiFetchError = useLastApiFetchError()
+//     const body = lastApiFetchError.value?.responseBody as HydraError
+//     const message = body?.['hydra:description'] || body?.message || t('error.page_not_found').toString()
+//     throw createError({
+//         statusCode: lastApiFetchError.value?.statusCode,
+//         message: '[web_response] ' + message,
+//         fatal: true,
+//     })
+// }
+//
+// const {
+//     page,
+//     // locale: webResponseLocale,
+//     metaTitle,
+//     title,
+//     blocks,
+//     alternateLinks,
+//     getHeadMeta,
+//     getHeadLinks,
+//     getHeadScripts,
+//     breadcrumbs,
+// } = useWebResponse(fetchResponse, useCommonContents())
+//
+// useHead({
+//     htmlAttrs: {
+//         lang: locale.value,
+//     },
+//     title: metaTitle.value,
+//     meta: getHeadMeta(),
+//     link: getHeadLinks(),
+//     script: getHeadScripts(),
+// })
 
-const pagePath = computed(() => {
-    return route.path
-})
-
-const { data: fetchResponse } = await useAsyncData<PageResponse>(
-    'web_response',
-    async (): Promise<PageResponse> => await $webResponseFetch(pagePath.value),
-)
-if (!fetchResponse.value) {
-    /*
-     * Throw a Nuxt Error using the same statusCode and message as the API response
-     */
-    const lastApiFetchError = useLastApiFetchError()
-    const body = lastApiFetchError.value?.responseBody as HydraError
-    const message = body?.['hydra:description'] || body?.message || t('error.page_not_found').toString()
-    throw createError({
-        statusCode: lastApiFetchError.value?.statusCode,
-        message: '[web_response] ' + message,
-        fatal: true,
-    })
-}
-
-const {
-    page,
-    // locale: webResponseLocale,
-    metaTitle,
-    title,
-    blocks,
-    alternateLinks,
-    getHeadMeta,
-    getHeadLinks,
-    getHeadScripts,
-    breadcrumbs,
-} = useWebResponse(fetchResponse, useCommonContents())
-
-useHead({
-    htmlAttrs: {
-        lang: locale.value,
-    },
-    title: metaTitle.value,
-    meta: getHeadMeta(),
-    link: getHeadLinks(),
-    script: getHeadScripts(),
-})
+const { page } = await useDynamicPage()
 
 const homePage = computed(() => {
     return useCommonContents().value?.home
 })
-const siteName = computed(() => {
-    return useCommonContents().value?.head?.siteName
-})
+
+// const siteName = computed(() => {
+//     return useCommonContents().value?.head?.siteName
+// })
+
 const mainMenuWalker = computed(() => {
     return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
 })
-const footerMenuWalker = computed(() => {
-    return useCommonContents().value?.menus?.footerMenuWalker as RoadizWalker
-})
+
+// const footerMenuWalker = computed(() => {
+//     return useCommonContents().value?.menus?.footerMenuWalker as RoadizWalker
+// })
+
 const articleContainer = computed(() => {
     return isArticleContainerEntity(page.value)
 })
+
 const pageEntity = computed(() => {
     return isPageEntity(page.value)
 })
