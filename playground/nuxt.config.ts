@@ -11,5 +11,5 @@ export default defineNuxtConfig({
     alias: {
         '~layer': join(currentDir, '../'),
     },
-    workspaceDir: join(currentDir, '../'),
+    watch: [join(currentDir, '../')],
 })

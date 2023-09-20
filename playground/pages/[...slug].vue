@@ -16,26 +16,26 @@
         <!--            </ul>-->
         <!--        </nav>-->
 
-        <nav v-if="mainMenuWalker">
-            <p>Main menu</p>
-            <ul>
-                <li v-for="(subWalker, index) in mainMenuWalker.children" :key="index">
-                    <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>
-                </li>
-            </ul>
-        </nav>
-        <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />
+        <!--        <nav v-if="mainMenuWalker">-->
+        <!--            <p>Main menu</p>-->
+        <!--            <ul>-->
+        <!--                <li v-for="(subWalker, index) in mainMenuWalker.children" :key="index">-->
+        <!--                    <nuxt-link :to="subWalker.item.url">{{ subWalker.item.title }}</nuxt-link>-->
+        <!--                </li>-->
+        <!--            </ul>-->
+        <!--        </nav>-->
+        <!--        <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />-->
         <h1 v-if="title">{{ title }}</h1>
-        <v-block-factory :blocks="blocks"></v-block-factory>
-        <v-article-container v-if="articleContainer" :article-container="page" />
-        <!--  Example v-form with modelValue  -->
-        <v-form
-            v-if="pageEntity"
-            v-model="formData"
-            :components-map="defaultComponentsMap"
-            :schema="formSchema"
-            @submit="onFormSubmit"
-        ></v-form>
+        <!--        <v-block-factory :blocks="blocks"></v-block-factory>-->
+        <!--        <v-article-container v-if="articleContainer" :article-container="page" />-->
+        <!--        &lt;!&ndash;  Example v-form with modelValue  &ndash;&gt;-->
+        <!--        <v-form-->
+        <!--            v-if="pageEntity"-->
+        <!--            v-model="formData"-->
+        <!--            :components-map="defaultComponentsMap"-->
+        <!--            :schema="formSchema"-->
+        <!--            @submit="onFormSubmit"-->
+        <!--        ></v-form>-->
 
         <!--        <footer>-->
         <!--            <nav v-if="footerMenuWalker">-->
@@ -51,10 +51,10 @@
 </template>
 
 <script setup lang="ts">
-import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
-import defaultSchema from '~layer/components/organisms/VForm/schemas/all-fields.js'
-import { isArticleContainerEntity, isPageEntity } from '~layer/utils/roadiz/entity'
-import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
+// import { RoadizWalker } from '@roadiz/abstract-api-client/dist/types/roadiz'
+// import defaultSchema from '~layer/components/organisms/VForm/schemas/all-fields.js'
+// import { isArticleContainerEntity, isPageEntity } from '~layer/utils/roadiz/entity'
+// import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 
 // const { $webResponseFetch } = useNuxtApp()
 // const { t, locale } = useI18n()
@@ -105,42 +105,47 @@ import VBreadcrumbs from '~/components/molecules/VBreadcrumbs/VBreadcrumbs.vue'
 //     script: getHeadScripts(),
 // })
 
-const { page } = await useDynamicPage()
+const { webResponse } = await useFetchPage()
+const pageResponse = computed(() => ({
+    webResponse,
+}))
+const { title } = useWebResponse(pageResponse, useCommonContents())
 
-const homePage = computed(() => {
-    return useCommonContents().value?.home
-})
-
-// const siteName = computed(() => {
-//     return useCommonContents().value?.head?.siteName
+//
+// const homePage = computed(() => {
+//     return useCommonContents().value?.home
 // })
-
-const mainMenuWalker = computed(() => {
-    return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
-})
-
-// const footerMenuWalker = computed(() => {
-//     return useCommonContents().value?.menus?.footerMenuWalker as RoadizWalker
+//
+// // const siteName = computed(() => {
+// //     return useCommonContents().value?.head?.siteName
+// // })
+//
+// const mainMenuWalker = computed(() => {
+//     return useCommonContents().value?.menus?.mainMenuWalker as RoadizWalker
 // })
-
-const articleContainer = computed(() => {
-    return isArticleContainerEntity(page.value)
-})
-
-const pageEntity = computed(() => {
-    return isPageEntity(page.value)
-})
-/*
- * VForm Example configuration
- */
-const formData = ref({})
-const defaultComponentsMap = computed(() => {
-    return useDefaultComponentsMap()
-})
-const formSchema = computed(() => {
-    return defaultSchema
-})
-const onFormSubmit = () => {
-    console.log(formData.value)
-}
+//
+// // const footerMenuWalker = computed(() => {
+// //     return useCommonContents().value?.menus?.footerMenuWalker as RoadizWalker
+// // })
+//
+// const articleContainer = computed(() => {
+//     return isArticleContainerEntity(page.value)
+// })
+//
+// const pageEntity = computed(() => {
+//     return isPageEntity(page.value)
+// })
+// /*
+//  * VForm Example configuration
+//  */
+// const formData = ref({})
+// const defaultComponentsMap = computed(() => {
+//     return useDefaultComponentsMap()
+// })
+// const formSchema = computed(() => {
+//     return defaultSchema
+// })
+// const onFormSubmit = () => {
+//     console.log(formData.value)
+// }
 </script>

@@ -1,5 +1,4 @@
 import { useFetchPage } from './use-fetch-page'
-import { HydraError, PageResponse } from '~/types/api'
 
 export async function useDynamicPage() {
     const { webResponse } = await useFetchPage()
@@ -9,7 +8,7 @@ export async function useDynamicPage() {
         // locale: webResponseLocale,
         metaTitle,
         title,
-        alternateLinks,
+        // alternateLinks,
         getHeadMeta,
         getHeadLinks,
         getHeadScripts,
@@ -29,7 +28,7 @@ export async function useDynamicPage() {
         page,
         breadcrumbs,
         title,
-        blocks,
+        // blocks,
         head,
     }
 }
