@@ -1,5 +1,5 @@
 {
-  "name": "@roadiz/nuxt3-layer",
+  "name": "@rezozero/nuxt3-layer",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -9,8 +9,7 @@
     "postinstall": "nuxt prepare",
     "lint": "yarn lint:script && yarn lint:style",
     "lint:script": "eslint --ext .ts,.js,.vue,.cjs .",
-    "lint:style": "stylelint \"**/*.{vue,css,scss}\"",
-    "build-storybook": "storybook build"
+    "lint:style": "stylelint \"**/*.{vue,css,scss}\""
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -29,20 +28,7 @@
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
-    "typescript": "^5.2.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "next",
-    "@types/node": "^18.17.5",
-    "@storybook/vue3": "next",
-    "@storybook-vue/nuxt": "rc",
-    "@storybook-vue/nuxt-storybook": "rc",
-    "@storybook/addon-essentials": "next",
-    "@storybook/addon-interactions": "next",
-    "@storybook/addon-links": "next",
-    "@storybook/blocks": "next",
-    "@storybook/builder-vite": "next",
-    "@storybook/testing-library": "^0.2.0"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@nuxt/image": "^1.0.0-rc.1",

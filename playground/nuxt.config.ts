@@ -8,7 +8,6 @@ const currentDir = dirname(fileURLToPath(import.meta.url))
 export default defineNuxtConfig({
     devtools: { enabled: true },
     extends: ['../'],
-    // modules: ['@storybook-vue/nuxt-storybook'],
     alias: {
         '~layer': join(currentDir, '../'),
     },
