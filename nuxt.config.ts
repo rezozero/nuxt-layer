@@ -9,7 +9,6 @@ const locales = ['en', 'fr', 'de']
 const defaultLocale = 'en'
 
 export default defineNuxtConfig({
-    devtools: { enabled: true },
     css: [join(currentDir, './assets/scss/main.scss')],
     modules: [
         '@nuxt/image',

@@ -195,7 +195,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     })
 
     return {
-        parallel: true,
+        // parallel: true,
         provide: {
             apiFetch: apiFetchFactory(),
             webResponseFetch,
