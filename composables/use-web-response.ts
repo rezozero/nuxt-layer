@@ -2,38 +2,36 @@ import { Ref } from 'vue'
 import { RoadizAlternateLink, RoadizNodesSources } from '@roadiz/abstract-api-client/dist/types/roadiz'
 import { joinURL } from 'ufo'
 import { Link, Meta, Script } from '@unhead/schema'
-import { CommonContent, PageResponse } from '~/types/api'
+import { PageResponse } from '~/types/api'
 import { EventsApi } from '~/types/event'
 import { getStructuredData } from '~/utils/seo/get-structured-data'
 import { isEventEntity } from '~/utils/roadiz/entity'
 
-export default function (pageResponse: Ref<PageResponse | null>, commonContents: Ref<CommonContent>) {
+export default function (webResponse: Ref<PageResponse | null>) {
     const img = useImage()
     const runtimeConfig = useRuntimeConfig()
+    const commonContents = useCommonContents()
 
-    const webResponse = computed(() => {
-        return pageResponse.value?.webResponse
-    })
     const pageType = computed(() => {
-        return pageResponse.value?.webResponse?.item?.['@type']
+        return webResponse?.item?.['@type']
     })
     const page = computed(() => {
-        return pageResponse.value?.webResponse?.item
+        return webResponse?.item
     })
     const blocks = computed(() => {
-        return pageResponse.value?.webResponse?.blocks || []
+        return webResponse?.blocks || []
     })
     const breadcrumbs = computed(() => {
-        return pageResponse.value?.webResponse?.breadcrumbs
+        return webResponse?.breadcrumbs
     })
     const head = computed(() => {
-        return pageResponse.value?.webResponse?.head
+        return webResponse?.head
     })
     const realms = computed(() => {
-        return pageResponse.value?.webResponse?.realms
+        return webResponse?.realms
     })
     const hidingBlocks = computed(() => {
-        return pageResponse.value?.webResponse?.hidingBlocks
+        return webResponse?.hidingBlocks
     })
     const alternateLinks = computed(() => {
         return pageResponse.value?.alternateLinks

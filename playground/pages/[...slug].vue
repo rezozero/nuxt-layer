@@ -25,7 +25,7 @@
         <!--            </ul>-->
         <!--        </nav>-->
         <!--        <v-breadcrumbs v-if="breadcrumbs" :breadcrumbs="breadcrumbs" :home-page="homePage" />-->
-        <h1 v-if="title">{{ title }}</h1>
+        <h1>{{ webResponse.item.altTitle || webResponse.item.title }}</h1>
         <!--        <v-block-factory :blocks="blocks"></v-block-factory>-->
         <!--        <v-article-container v-if="articleContainer" :article-container="page" />-->
         <!--        &lt;!&ndash;  Example v-form with modelValue  &ndash;&gt;-->
@@ -106,10 +106,7 @@
 // })
 
 const { webResponse } = await useFetchPage()
-const pageResponse = computed(() => ({
-    webResponse,
-}))
-const { title } = useWebResponse(pageResponse, useCommonContents())
+// const { title } = useWebResponse(webResponse)
 
 //
 // const homePage = computed(() => {
