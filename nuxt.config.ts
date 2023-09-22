@@ -9,6 +9,7 @@ const locales = ['en', 'fr', 'de']
 const defaultLocale = 'en'
 
 export default defineNuxtConfig({
+    devtools: { enabled: true },
     css: [join(currentDir, './assets/scss/main.scss')],
     modules: ['@nuxt/image', '@nuxtjs/i18n', '@rezo-zero/intervention-request-provider'],
     // https://github.com/storybook-vue/storybook-nuxt/issues/57
