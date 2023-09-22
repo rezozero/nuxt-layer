@@ -172,27 +172,27 @@ const webResponseFetch = async (relativePath: string, opts?: NitroFetchOptions<a
 
 export default defineNuxtPlugin((nuxtApp) => {
     // called right after a new locale has been set
-    nuxtApp.hook('i18n:localeSwitched', async ({ oldLocale, newLocale }) => {
-        if (oldLocale !== newLocale) {
-            /*
-             * Fetch common contents again if locale has changed
-             */
-            useCommonContents().value = await (nuxtApp.$apiFetch as $Fetch)<CommonContent>('/common_content', {
-                method: 'GET',
-                query: {
-                    _locale: newLocale,
-                },
-            })
-        }
-    })
-
-    nuxtApp.hook('app:beforeMount', async (vueApp) => {
-        const webResponseLocale = useWebResponseLocale()
-        if (webResponseLocale.value.locale && webResponseLocale.value.locale !== vueApp.$nuxt.$i18n.locale.value) {
-            console.debug('[app:beforeMount] Set i18n locale to', webResponseLocale.value.locale)
-            await vueApp.$nuxt.$i18n.setLocale(webResponseLocale.value.locale)
-        }
-    })
+    // nuxtApp.hook('i18n:localeSwitched', async ({ oldLocale, newLocale }) => {
+    //     if (oldLocale !== newLocale) {
+    //         /*
+    //          * Fetch common contents again if locale has changed
+    //          */
+    //         useCommonContents().value = await (nuxtApp.$apiFetch as $Fetch)<CommonContent>('/common_content', {
+    //             method: 'GET',
+    //             query: {
+    //                 _locale: newLocale,
+    //             },
+    //         })
+    //     }
+    // })
+    //
+    // nuxtApp.hook('app:beforeMount', async (vueApp) => {
+    //     const webResponseLocale = useWebResponseLocale()
+    //     if (webResponseLocale.value.locale && webResponseLocale.value.locale !== vueApp.$nuxt.$i18n.locale.value) {
+    //         console.debug('[app:beforeMount] Set i18n locale to', webResponseLocale.value.locale)
+    //         await vueApp.$nuxt.$i18n.setLocale(webResponseLocale.value.locale)
+    //     }
+    // })
 
     return {
         // parallel: true,
