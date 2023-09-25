@@ -28,7 +28,9 @@
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "unplugin-svg-component": "^0.7.6",
+    "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
     "@nuxt/image": "^1.0.0-rc.1",

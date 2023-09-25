@@ -1,5 +1,7 @@
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import unpluginSvgComponent from 'unplugin-svg-component/vite'
+import svgLoader from 'vite-svg-loader'
 
 // @see https://nuxt.com/docs/guide/going-further/layers#relative-paths-and-aliases
 const currentDir = dirname(fileURLToPath(import.meta.url))
@@ -47,6 +49,26 @@ export default defineNuxtConfig({
                 },
             },
         },
+        plugins: [
+            unpluginSvgComponent({
+                iconDir: ['~assets/images/icons'],
+                dts: true,
+                dtsDir: 'types',
+                svgSpriteDomId: 'my-svg-id',
+                prefix: 'icon',
+                componentName: 'MySvgIcon',
+                symbolIdFormatter: (svgName: string, prefix: string): string => {
+                    const nameArr = svgName.split('/')
+                    if (prefix) nameArr.unshift(prefix)
+                    return nameArr.join('-').replace(/\.svg$/, '')
+                },
+                optimizeOptions: undefined,
+                vueVersion: 3,
+                scanStrategy: 'component',
+                treeShaking: true,
+            }),
+            svgLoader(),
+        ],
     },
     // https://github.com/rezozero/intervention-request-provider
     image: {
