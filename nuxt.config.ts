@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 // import unpluginSvgComponent from 'unplugin-svg-component/vite'
-import svgLoader from 'vite-svg-loader'
+// import svgLoader from 'vite-svg-loader'
 
 // @see https://nuxt.com/docs/guide/going-further/layers#relative-paths-and-aliases
 const currentDir = dirname(fileURLToPath(import.meta.url))
@@ -67,7 +67,7 @@ export default defineNuxtConfig({
             //     scanStrategy: 'component',
             //     treeShaking: true,
             // }),
-            svgLoader(),
+            // svgLoader(),
         ],
     },
     // https://github.com/rezozero/intervention-request-provider
