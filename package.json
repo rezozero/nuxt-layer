@@ -29,7 +29,6 @@
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
     "typescript": "^5.2.2",
-    "unplugin-svg-component": "^0.7.6",
     "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
@@ -40,6 +39,7 @@
     "@sentry/browser": "^7.66.0",
     "@vue-a11y/skip-to": "^2.1.2",
     "sitemap": "^7.1.1",
+    "unplugin-svg-component": "^0.7.6",
     "vue-multiselect": "^3.0.0-beta.2"
   },
   "engines": {
