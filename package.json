@@ -1,24 +1,26 @@
 {
-  "name": "@rezozero/nuxt3-layer",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "nuxi dev playground",
-    "build": "nuxi build playground",
-    "generate": "nuxi generate playground",
-    "preview": "nuxi preview playground",
-    "postinstall": "nuxi prepare playground",
-    "lint": "eslint ."
-  },
-  "devDependencies": {
-    "@nuxt/eslint-config": "^0.2.0",
-    "@types/node": "^20.11.19",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "nuxt": "^3.10.3",
-    "prettier": "^3.2.5"
-  },
-  "engines": {
-    "node": "^20"
-  }
+    "name": "@rezozero/nuxt3-layer",
+    "version": "0.1.0",
+    "scripts": {
+        "dev": "nuxi dev playground",
+        "build": "nuxi build playground",
+        "generate": "nuxi generate playground",
+        "preview": "nuxi preview playground",
+        "postinstall": "nuxi prepare playground",
+        "release": "npm run lint && changelogen --release && npm publish && git push --follow-tags",
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "@nuxt/eslint-config": "^0.2.0",
+        "@types/node": "^20.11.19",
+        "changelogen": "^0.5.5",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "nuxt": "^3.10.3",
+        "prettier": "^3.2.5"
+    },
+    "engines": {
+        "node": "^20"
+    }
 }
