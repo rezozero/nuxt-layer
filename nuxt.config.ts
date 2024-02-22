@@ -9,13 +9,9 @@ export default defineNuxtConfig({
     // css: [join(currentDir, './assets/scss/main.scss')],
     // modules: [],
     components: [
-        // join(currentDir, './components/atoms'),
-        // join(currentDir, './components/molecules'),
-        // join(currentDir, './components/organisms'),
-        // // TODO: use `global` imports for blocks. For now, Storybook throws an error.
-        // // @see https://github.com/storybook-vue/storybook-nuxt/issues/57
-        // // { path: '~/components/blocks/', global: true },
-        // join(currentDir, './components/blocks'),
+        join(currentDir, './components/atoms'),
+        join(currentDir, './components/molecules'),
+        join(currentDir, './components/organisms'),
     ],
     runtimeConfig: {
         public: {

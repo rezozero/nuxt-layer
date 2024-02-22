@@ -6,8 +6,9 @@
         "build": "nuxi build playground",
         "generate": "nuxi generate playground",
         "preview": "nuxi preview playground",
-        "postinstall": "nuxi prepare playground",
-        "release": "npm run lint && changelogen --release && npm publish && git push --follow-tags",
+        "prepare": "nuxi prepare && nuxi prepare playground",
+        "postinstall": "npm run prepare",
+        "release": "npm run lint && changelogen --release && git push --follow-tags",
         "lint": "eslint ."
     },
     "devDependencies": {
