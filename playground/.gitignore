@@ -21,7 +21,4 @@ logs
 # Local env files
 .env
 .env.*
-!.env.example
-
-svg-component.d.ts
-svg-component-global.d.ts
+!.env.sample
