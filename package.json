@@ -1,46 +1,24 @@
 {
   "name": "@rezozero/nuxt3-layer",
-  "private": true,
+  "version": "0.1.0",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "yarn lint:script && yarn lint:style",
-    "lint:script": "eslint --ext .ts,.js,.vue,.cjs .",
-    "lint:style": "stylelint \"**/*.{vue,css,scss}\""
+    "dev": "nuxi dev playground",
+    "build": "nuxi build playground",
+    "generate": "nuxi generate playground",
+    "preview": "nuxi preview playground",
+    "postinstall": "nuxi prepare playground",
+    "lint": "eslint ."
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@types/json-schema": "^7.0.12",
-    "eslint": "^8.49.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "include-media": "^2.0.0",
-    "nuxt": "^3.7.0",
-    "postcss-html": "^1.5.0",
-    "prettier": "^3.0.3",
-    "sass": "^1.66.1",
-    "stylelint": "^15.10.3",
-    "stylelint-config-css-modules": "^4.3.0",
-    "stylelint-config-idiomatic-order": "^9.0.0",
-    "stylelint-config-standard-scss": "^11.0.0",
-    "stylelint-config-standard-vue": "^1.0.0",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "@nuxt/image": "^1.0.0-rc.1",
-    "@nuxtjs/i18n": "^8.0.0-rc.3",
-    "@rezo-zero/intervention-request-provider": "^1.0.0-next.7",
-    "@roadiz/abstract-api-client": "^3.1.3",
-    "@sentry/browser": "^7.66.0",
-    "@vue-a11y/skip-to": "^2.1.2",
-    "sitemap": "^7.1.1",
-    "vue-multiselect": "^3.0.0-beta.2"
+    "@nuxt/eslint-config": "^0.2.0",
+    "@types/node": "^20.11.19",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "nuxt": "^3.10.3",
+    "prettier": "^3.2.5"
   },
   "engines": {
-    "node": "^18"
+    "node": "^20"
   }
 }
