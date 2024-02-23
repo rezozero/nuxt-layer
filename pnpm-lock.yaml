@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@rezo-zero/nuxt-stories':
-    specifier: ^0.1.9
-    version: 0.1.9
+    specifier: ^0.1.10
+    version: 0.1.10
 
 devDependencies:
   '@nuxt/eslint-config':
@@ -1442,8 +1442,8 @@ packages:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: true
 
-  /@rezo-zero/nuxt-stories@0.1.9:
-    resolution: {integrity: sha512-E2X/cJO9hoMzozDG88pKE+fZ1ijUZKrzCaiYlm2EMtNqk2X2JA0U0BCMbQie5lLzWEqwEokD6U5Vmq0zi750DA==}
+  /@rezo-zero/nuxt-stories@0.1.10:
+    resolution: {integrity: sha512-L9rEbJNkuUMDU3qmIZyDuCYiGVvz8PGBWZWG6zmpWJ3uQW385E4I6jcoh2qcFy1XpN7MWU+IbKfbMDHT1gRB9A==}
     engines: {node: ^20}
     dependencies:
       '@nuxt/kit': 3.10.3
