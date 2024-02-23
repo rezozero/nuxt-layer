@@ -7,7 +7,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url))
 export default defineNuxtConfig({
     devtools: { enabled: true },
     // css: [join(currentDir, './assets/scss/main.scss')],
-    // modules: [],
+    modules: ['@rezo-zero/nuxt-stories'],
     components: [
         join(currentDir, './components/atoms'),
         join(currentDir, './components/molecules'),
