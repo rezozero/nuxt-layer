@@ -23,10 +23,5 @@
     },
     "engines": {
         "node": "^20"
-    },
-    "dependencies": {
-        "@nuxt/image": "^1.3.0",
-        "@rezo-zero/intervention-request-provider": "1.0.0",
-        "@rezo-zero/nuxt-stories": "^0.1.11"
     }
 }
