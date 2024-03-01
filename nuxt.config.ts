@@ -10,4 +10,15 @@ export default defineNuxtConfig({
         join(currentDir, './components/molecules'),
         join(currentDir, './components/organisms'),
     ],
+    runtimeConfig: {
+        public: {
+            site: {
+                url: 'http://localhost:3000',
+            },
+            api: {
+                url: '',
+                endpointPrefix: '/api',
+            },
+        },
+    },
 })
