@@ -13,9 +13,9 @@ Look at the [Nuxt 3 layer documentation](https://nuxt.com/docs/guide/going-furth
 Make sure to install the dependencies:
 
 ```bash
-npm install
+pnpm install
 cd playground
-npm install
+pnpm install
 ```
 
 ## Development Server
@@ -23,5 +23,11 @@ npm install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-npm run dev
+pnpm dev
+```
+
+## Release
+
+```bash
+pnpm realease
 ```
