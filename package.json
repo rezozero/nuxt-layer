@@ -23,6 +23,7 @@
     "prettier": "^3.2.5"
   },
   "dependencies": {
+    "@roadiz/types": "^0.1.0",
     "ufo": "^1.4.0"
   },
   "engines": {

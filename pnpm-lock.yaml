@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@roadiz/types':
+    specifier: ^0.1.0
+    version: 0.1.0
   ufo:
     specifier: ^1.4.0
     version: 1.4.0
@@ -1478,6 +1481,10 @@ packages:
   /@polka/url@1.0.0-next.24:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: true
+
+  /@roadiz/types@0.1.0:
+    resolution: {integrity: sha512-F2dMwawwMUwRVj6JhMOANzH2phFWMLPpx8phdNJ9FdG0XgUgR860MQJqi67/p10vC2XDcqRGPFI4FO2c34Kq0g==}
+    dev: false
 
   /@rollup/plugin-alias@5.1.0(rollup@4.12.0):
     resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
