@@ -6,10 +6,13 @@ interface UsePreviewState {
 interface UsePreviewOptions extends UsePreviewState {}
 
 export function useRoadizPreview(options?: UsePreviewOptions) {
-    const state = useState<UsePreviewState>('preview', () => ({
-        isActive: false,
-        token: undefined as string | undefined,
-    }))
+    const state = useState<UsePreviewState>('preview', () => {
+        const route = useRoute()
+        const token = typeof route.query?.token === 'string' ? route.query.token : undefined
+        const isActive = !!token && route.query?._preview === '1'
+
+        return { token, isActive }
+    })
 
     const isActive = computed({
         get() {
