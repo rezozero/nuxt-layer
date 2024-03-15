@@ -1,6 +1,6 @@
 {
   "name": "@rezozero/nuxt3-layer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "nuxi dev playground",
     "build": "nuxi build playground",
