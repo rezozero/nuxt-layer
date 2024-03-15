@@ -8,6 +8,9 @@ export default defineNuxtConfig({
                 url: '',
                 endpointPrefix: '/api',
             },
+            roadiz: {
+                documentPath: '/files',
+            },
         },
     },
 })
