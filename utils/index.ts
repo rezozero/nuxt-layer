@@ -8,3 +8,4 @@ export { getResponseAlternateLinks } from './roadiz/get-response-alternate-links
 export * from './roadiz/document'
 export * from './roadiz/entity'
 export * from './roadiz/node-sources'
+export * from './roadiz/embed'
