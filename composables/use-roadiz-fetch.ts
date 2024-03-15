@@ -1,49 +1,7 @@
-import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
+import type { AsyncDataOptions } from '#app'
 
-export function useRoadizFetch<DefaultR extends NitroFetchRequest = NitroFetchRequest>(
-    options?: NitroFetchOptions<DefaultR>,
-) {
-    return $fetch.create({
-        onRequest(context) {
-            /*
-             * Add preview token to every request if preview mode is enabled.
-             */
-            const { token, isActive } = useRoadizPreview()
+export function useRoadizFetch<T>(url?: string | AsyncDataOptions<T>, options?: AsyncDataOptions<T>) {
+    const fetch = useRoadizFetchFactory()
 
-            if (isActive.value && token.value) {
-                context.options.query = {
-                    ...context.options.query,
-                    _preview: '1',
-                }
-
-                context.options.headers = {
-                    ...context.options.headers,
-                    Authorization: `Bearer ${token.value}`,
-                }
-            }
-            /*
-             * Add locale to every request if it is not a web response request.
-             */
-            if (context.request.toString() !== '/web_response_by_path') {
-                const { $i18n } = useNuxtApp()
-
-                context.options.query = {
-                    ...context.options.query,
-                    _locale: $i18n?.locale.value || $i18n?.defaultLocale?.toString(),
-                }
-            }
-        },
-        onResponseError(context) {
-            throw createError({
-                statusCode: context.response.status,
-                message: context.response.statusText,
-            })
-        },
-        headers: {
-            'accept-encoding': 'gzip, deflate',
-            accept: 'application/ld+json',
-        },
-        baseURL: useApiUrl(),
-        ...options,
-    })
+    return useAsyncData<T>(() => fetch(url), options)
 }

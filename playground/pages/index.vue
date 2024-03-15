@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const response = await useRoadizFetch('/web_response_by_path', {
+    query: {
+        path: '/',
+    },
+}).catch((error) => {
+    console.error('error', error)
+})
+
+console.log('response', response)
+</script>
 
 <template>
     <div>
