@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@roadiz/types": "^0.1.0",
+    "tiny-emitter": "^2.1.0",
     "ufo": "^1.4.0"
   },
   "engines": {
