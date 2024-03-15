@@ -1,11 +1,3 @@
-<template>
-    <div v-if="jwt" :class="$style.root">
-        <div :class="$style.user">Previewing as: {{ jwt.username }}</div>
-        <div>Expire at: {{ remainingTime }}</div>
-        <button :class="$style.button" @click.prevent="stopPreview">Stop previewing</button>
-    </div>
-</template>
-
 <script setup lang="ts">
 const { token, reset: resetPreview } = useRoadizPreview()
 
@@ -49,6 +41,14 @@ function stopPreview() {
     router.push({ path: route.path, query: { ...route.query, _preview: undefined, token: undefined } })
 }
 </script>
+
+<template>
+    <div v-if="jwt" :class="$style.root">
+        <div :class="$style.user">Previewing as: {{ jwt.username }}</div>
+        <div>Expire at: {{ remainingTime }}</div>
+        <button :class="$style.button" @click.prevent="stopPreview">Stop previewing</button>
+    </div>
+</template>
 
 <style lang="scss" module>
 .root {
