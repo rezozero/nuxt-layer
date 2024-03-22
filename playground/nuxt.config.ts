@@ -7,4 +7,10 @@ export default defineNuxtConfig({
         pattern: 'playground/**/*.stories.vue',
         root: 'playground/stories',
     },
+    runtimeConfig: {
+        public: {
+            siteName: 'rezo-zero/nuxt-layer playground',
+            baseURL: 'https://nuxt-layer.rezo-zero.com',
+        },
+    },
 })
