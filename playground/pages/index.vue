@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// const response = await useRoadizFetch('/common_content')
+//
+// console.log('response.data', response.data.value)
+</script>
 
 <template>
     <div>
