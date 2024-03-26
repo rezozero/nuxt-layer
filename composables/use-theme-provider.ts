@@ -1,7 +1,6 @@
 import { provide } from 'vue'
 import type { ComputedRef, InjectionKey } from 'vue'
-import { type Theme, useTheme } from '~/composables/use-theme'
-import type { ThemeOptions } from '~/composables/use-theme'
+import type { Theme, ThemeOptions } from '~/composables/use-theme'
 
 export const THEME_PROVIDER_KEY: InjectionKey<ComputedRef<Theme | 'light'>> = Symbol('themeProviderKey')
 
