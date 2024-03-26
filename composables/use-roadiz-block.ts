@@ -1,8 +1,14 @@
-import type { RoadizNodesSources } from '@roadiz/types'
-import type { RoadizBlockProps } from '~/types/roadiz'
+import type { RoadizNodesSources, RoadizWalker } from '@roadiz/types'
+
+export interface UseRoadizBlockProps {
+    walker: RoadizWalker
+    index: number
+    blocks?: RoadizWalker[]
+    numBlocks?: number | string
+}
 
 export interface UseRoadizBlockOptions {
-    props: RoadizBlockProps
+    props: UseRoadizBlockProps
 }
 
 export function useRoadizBlock<T extends RoadizNodesSources>({ props }: UseRoadizBlockOptions) {
