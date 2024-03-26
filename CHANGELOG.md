@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- **roadiz:** Add useRoadizDocumentUrl() ([774bc12](https://github.com/rezozero/nuxt-layer/commit/774bc12))
+- Use regex to match against entities `@type` property for Roadiz NS and schema.org ([87d2ac3](https://github.com/rezozero/nuxt-layer/commit/87d2ac3))
+- Optional path for useRoadizWebResponse() ([eb51f85](https://github.com/rezozero/nuxt-layer/commit/eb51f85))
+- UseRoadizFetch() overrides the Nuxt useFetch() composable ([409fac1](https://github.com/rezozero/nuxt-layer/commit/409fac1))
+- Export interface for useRoadizBlock props ([44506ad](https://github.com/rezozero/nuxt-layer/commit/44506ad))
+- **roadiz:** Handle block prefix ([9d26454](https://github.com/rezozero/nuxt-layer/commit/9d26454))
+
+### 🩹 Fixes
+
+- **theme:** UseThemeProvider() imports ([652d1d2](https://github.com/rezozero/nuxt-layer/commit/652d1d2))
+- **roadiz:** UseRoadizBlock() composable name ([858ddcd](https://github.com/rezozero/nuxt-layer/commit/858ddcd))
+
+### 🏡 Chore
+
+- Upgrade to Nuxt 3.11.1 ([d326f71](https://github.com/rezozero/nuxt-layer/commit/d326f71))
+
+### ❤️ Contributors
+
+- Manuel Odelain <manuel@rezo-zero.com>
+- Ambroise Maupate <ambroise@rezo-zero.com>
+
 ## v0.1.2
 
 [compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.1...v0.1.2)
