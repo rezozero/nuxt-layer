@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.3...v0.1.4)
+
+### 🩹 Fixes
+
+- **useRoadizFetch:** Return types ([6e9c1bd](https://github.com/rezozero/nuxt-layer/commit/6e9c1bd))
+
+### ❤️ Contributors
+
+- Manuel Odelain <manuel@rezo-zero.com>
+
 ## v0.1.3
 
 [compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.2...v0.1.3)
