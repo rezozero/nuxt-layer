@@ -1,5 +1,7 @@
 <script setup lang="ts">
-// const response = await useRoadizFetch('/common_content')
+// import type { RoadizNodesSources } from '@roadiz/types'
+//
+// const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
 //
 // console.log('response.data', response.data.value)
 </script>

@@ -1,9 +1,10 @@
 import type { AvailableRouterMethod, NitroFetchRequest } from 'nitropack'
 import { FetchError } from 'ofetch'
 import type { Ref } from 'vue'
-import type { KeysOf, PickFrom } from 'nuxt/dist/app/composables/asyncData'
 import type { AsyncData, FetchResult, UseFetchOptions } from 'nuxt/app'
+import type { KeysOf, PickFrom } from '#app/composables/asyncData'
 
+// @see https://github.com/nuxt/nuxt/blob/main/packages/nuxt/src/app/composables/fetch.ts
 export function useRoadizFetch<
     ResT = void,
     ErrorT = FetchError,
