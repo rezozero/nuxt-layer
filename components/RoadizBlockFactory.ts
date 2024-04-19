@@ -14,11 +14,17 @@ const isComponent = (component: string): boolean => {
 
 const RoadizBlockFactory: FunctionalComponent<RoadizBlockFactoryProps> = ({ blocks, prefix }, context): VNodeChild => {
     const blocksWithComponent = blocks.filter((block) => {
-        const componentName = prefix ? prefix + block.item['@type'] : block.item['@type']
+        const componentName = prefix
+            ? prefix + block.item['@type'].replace(/NS([a-zA-Z]+)/g, '$1')
+            : block.item['@type'].replace(/NS([a-zA-Z]+)/g, '$1')
+
         return isComponent(componentName)
     })
     return blocksWithComponent.map((block, index, blocks) => {
-        const componentName = prefix ? prefix + block.item['@type'] : block.item['@type']
+        const componentName = prefix
+            ? prefix + block.item['@type'].replace(/NS([a-zA-Z]+)/g, '$1')
+            : block.item['@type'].replace(/NS([a-zA-Z]+)/g, '$1')
+
         return h(resolveComponent(componentName), {
             walker: block,
             index,

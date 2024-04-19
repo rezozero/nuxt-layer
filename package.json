@@ -1,6 +1,6 @@
 {
   "name": "@rezozero/nuxt3-layer",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "scripts": {
     "dev": "nuxi dev playground",
     "build": "nuxi build playground",
@@ -19,7 +19,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "husky": "^9.0.11",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.11.2",
     "prettier": "^3.2.5"
   },
   "dependencies": {

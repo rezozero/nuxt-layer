@@ -1,4 +1,9 @@
 <script setup lang="ts">
+// import type { RoadizNodesSources } from '@roadiz/types'
+//
+// const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
+//
+// console.log('response.data', response.data.value)
 import { getStructuredDataScript } from '../../utils/structured-data'
 
 const runtimeConfig = useRuntimeConfig()

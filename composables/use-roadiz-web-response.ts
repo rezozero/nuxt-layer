@@ -1,6 +1,9 @@
 import type { RoadizWebResponse } from '@roadiz/types'
+import { joinURL } from 'ufo'
 
-export async function useRoadizWebResponse<T>(path: string) {
+export async function useRoadizWebResponse<T>(path?: string) {
+    path = joinURL('/', path || useRoute().path)
+
     const fetch = useRoadizFetchFactory()
     const { data } = await useAsyncData(async () => {
         try {
