@@ -13,7 +13,9 @@ export function isEmbed(document: RoadizDocument | undefined): boolean {
 }
 
 export function isVideoEmbed(document: RoadizDocument | undefined): boolean {
-    return isEmbed(document) && (document?.embedPlatform === 'vimeo' || document?.embedPlatform === 'youtube')
+    const videoPlatforms = ['vimeo', 'youtube', 'dailymotion', 'ted', 'twitch']
+    const platform = document?.embedPlatform?.toLowerCase()
+    return isEmbed(document) && !!platform && videoPlatforms.includes(platform)
 }
 
 export function isVideo(document: RoadizDocument | undefined): boolean {
@@ -29,12 +31,11 @@ export function isPDF(document: RoadizDocument | undefined): boolean {
 }
 
 export function isAudio(document: RoadizDocument | undefined): boolean {
+    const platform = document?.embedPlatform?.toLowerCase()
     return (
         document?.mimeType === 'audio/mpeg' ||
         document?.mimeType === 'audio/mp3' ||
-        (isEmbed(document) &&
-            !!document?.embedPlatform &&
-            ['deezer', 'spotify', 'soundcloud'].includes(document.embedPlatform))
+        (isEmbed(document) && !!platform && ['deezer', 'spotify', 'soundcloud'].includes(platform))
     )
 }
 
