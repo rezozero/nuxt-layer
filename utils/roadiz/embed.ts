@@ -34,7 +34,10 @@ export function getSoundcloudEmbedSrc(id: string, params: Record<string, string>
 }
 
 export function getDailymotionEmbedSrc(id: string, params: Record<string, string> = {}): string {
-    return getEmbedUrl(`https://www.dailymotion.com/embed/video/${id}`, params)
+    return getEmbedUrl(`https://geo.dailymotion.com/player.html`, {
+        ...params,
+        video: id,
+    })
 }
 
 export function getTedEmbedSrc(id: string, params: Record<string, string> = {}): string {
