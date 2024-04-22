@@ -1,9 +1,13 @@
 export function getEmbedSrc(id: string, platform: string, params: Record<string, string> = {}): string | undefined {
+    platform = platform.toLowerCase()
     if (platform === 'vimeo') return getVimeoEmbedSrc(id, params)
     if (platform === 'youtube') return getYouTubeEmbedSrc(id, params)
     if (platform === 'deezer') return getDeezerEmbedSrc(id, params)
     if (platform === 'spotify') return getSpotifyEmbedSrc(id, params)
     if (platform === 'soundcloud') return getSoundcloudEmbedSrc(id, params)
+    if (platform === 'dailymotion') return getDailymotionEmbedSrc(id, params)
+    if (platform === 'ted') return getTedEmbedSrc(id, params)
+    if (platform === 'twitch') return getTwitchEmbedSrc(id, params)
 }
 
 export function getVimeoEmbedSrc(id: string, params: Record<string, string> = {}): string {
@@ -23,7 +27,29 @@ export function getSpotifyEmbedSrc(id: string, params: Record<string, string> = 
 }
 
 export function getSoundcloudEmbedSrc(id: string, params: Record<string, string> = {}): string {
-    return getEmbedUrl(`https://w.soundcloud.com/player/?url=${id}`, params)
+    return getEmbedUrl(`https://w.soundcloud.com/player/`, {
+        ...params,
+        url: id,
+    })
+}
+
+export function getDailymotionEmbedSrc(id: string, params: Record<string, string> = {}): string {
+    return getEmbedUrl(`https://geo.dailymotion.com/player.html`, {
+        ...params,
+        video: id,
+    })
+}
+
+export function getTedEmbedSrc(id: string, params: Record<string, string> = {}): string {
+    return getEmbedUrl(`https://embed.ted.com/talks/${id}`, params)
+}
+
+export function getTwitchEmbedSrc(id: string, params: Record<string, string> = {}): string {
+    return getEmbedUrl(`https://player.twitch.tv/`, {
+        ...params,
+        video: id,
+        branding: '0',
+    })
 }
 
 export function getEmbedUrl(url: string, params: Record<string, string> = {}) {
