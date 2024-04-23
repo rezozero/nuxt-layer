@@ -5,7 +5,6 @@ Look at the [Nuxt 3 layer documentation](https://nuxt.com/docs/guide/going-furth
 ## What's inside?
 
 - Default Nuxt 3 project configuration
-- Nuxt Image module with Intervention Request provider
 - Shared components / composables / utils / server routes
 
 ## Setup
