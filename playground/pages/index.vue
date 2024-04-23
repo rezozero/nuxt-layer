@@ -4,6 +4,10 @@
 // const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
 //
 // console.log('response.data', response.data.value)
+
+// const webResponse = await useRoadizWebResponse('/')
+//
+// console.log('webResponse', webResponse)
 </script>
 
 <template>

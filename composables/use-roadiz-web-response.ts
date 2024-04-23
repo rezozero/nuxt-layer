@@ -4,9 +4,9 @@ import { joinURL } from 'ufo'
 export async function useRoadizWebResponse<T>(path?: string) {
     path = joinURL('/', path || useRoute().path)
 
-    const fetch = useRoadizFetchFactory()
     const { data } = await useAsyncData(async () => {
         try {
+            const fetch = useRoadizFetchFactory()
             const response = await fetch.raw<RoadizWebResponse>('/web_response_by_path', {
                 method: 'GET',
                 query: {
@@ -18,9 +18,8 @@ export async function useRoadizWebResponse<T>(path?: string) {
 
             return { webResponse: response._data, alternateLinks }
         } catch (error) {
-            console.error('Error=', error)
-
-            return { error }
+            // @ts-ignore cannot know the error type
+            return { error: createError(error) }
         }
     })
     const webResponse = data.value?.webResponse
