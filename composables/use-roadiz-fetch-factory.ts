@@ -37,6 +37,7 @@ export function useRoadizFetchFactory<DefaultR extends NitroFetchRequest = Nitro
             throw createError({
                 statusCode: context.response.status,
                 message: context.response.statusText,
+                data: context.response,
             })
         },
         headers: {
