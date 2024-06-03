@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.6
+
+[compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.5...v0.1.6)
+
+### 🚀 Enhancements
+
+- Add useRoadizHydraCollectionFetch ([3e0e421](https://github.com/rezozero/nuxt-layer/commit/3e0e421))
+
+### 🏡 Chore
+
+- Add nuxt i18n ([010c88e](https://github.com/rezozero/nuxt-layer/commit/010c88e))
+
+### ❤️ Contributors
+
+- Timothe <timothe@rezo-zero.com>
+
 ## v0.1.5
 
 [compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.4...v0.1.5)
