@@ -9,8 +9,10 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            siteName: 'rezo-zero/nuxt-layer playground',
-            baseURL: 'https://nuxt-layer.rezo-zero.com',
+            site: {
+                name: 'rezo-zero/nuxt-layer playground',
+                url: 'https://nuxt-layer.rezo-zero.com',
+            },
         },
     },
 })

@@ -2,9 +2,13 @@
 import { getStructuredDataScript } from '../../utils/structured-data'
 // import type { RoadizNodesSources } from '@roadiz/types'
 
+// Debug useRoadizFetch()
 // const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
+
+// Debug useRoadizWebResponse()
 // const webResponse = await useRoadizWebResponse('/')
 
+// Debug getStructuredDataScript()
 const runtimeConfig = useRuntimeConfig()
 
 useHead({
@@ -12,7 +16,7 @@ useHead({
         getStructuredDataScript({
             '@type': 'WebSite',
             name: runtimeConfig.public.siteName,
-            url: runtimeConfig.public.baseURL,
+            url: runtimeConfig.public.siteUrl,
         }),
     ],
 })
