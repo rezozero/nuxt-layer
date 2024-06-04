@@ -1,13 +1,25 @@
 <script setup lang="ts">
+import { getStructuredDataScript } from '../../utils/structured-data'
 // import type { RoadizNodesSources } from '@roadiz/types'
-//
-// const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
-//
-// console.log('response.data', response.data.value)
 
+// Debug useRoadizFetch()
+// const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
+
+// Debug useRoadizWebResponse()
 // const webResponse = await useRoadizWebResponse('/')
-//
-// console.log('webResponse', webResponse)
+
+// Debug getStructuredDataScript()
+const runtimeConfig = useRuntimeConfig()
+
+useHead({
+    script: [
+        getStructuredDataScript({
+            '@type': 'WebSite',
+            name: runtimeConfig.public.siteName,
+            url: runtimeConfig.public.siteUrl,
+        }),
+    ],
+})
 </script>
 
 <template>
