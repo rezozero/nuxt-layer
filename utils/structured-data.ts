@@ -13,6 +13,9 @@ export function getStructuredDataScript(content: MaybeRef<structuredDataContent>
 
     return {
         type: 'application/ld+json',
-        innerHTML: toDisplayString(jsonLdContent),
+        innerHTML: toDisplayString(jsonLdContent).replaceAll(
+            /"@id":\s?"\/api\/\.well-known\/genid\/([^"]+)",\s*/gm, // Remove auto genid from structured data. It could lead Google to follow them as links, plus it is useless.
+            '',
+        ),
     }
 }
