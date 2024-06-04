@@ -1,6 +1,45 @@
 # Changelog
 
 
+## v0.1.6
+
+[compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.5...v0.1.6)
+
+### 🚀 Enhancements
+
+- Add useRoadizHydraCollectionFetch ([3e0e421](https://github.com/rezozero/nuxt-layer/commit/3e0e421))
+
+### 🏡 Chore
+
+- Add nuxt i18n ([010c88e](https://github.com/rezozero/nuxt-layer/commit/010c88e))
+
+### ❤️ Contributors
+
+- Timothe <timothe@rezo-zero.com>
+
+## v0.1.5
+
+[compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.4...v0.1.5)
+
+### 🚀 Enhancements
+
+- Missing dailymotion, ted, twitch embed platforms, fixes #6 ([#6](https://github.com/rezozero/nuxt-layer/issues/6))
+- New embed iframe src for Dailymotion ([c2c496a](https://github.com/rezozero/nuxt-layer/commit/c2c496a))
+
+### 🩹 Fixes
+
+- **roadiz:** Serialize  web response error ([ac7932d](https://github.com/rezozero/nuxt-layer/commit/ac7932d))
+
+### 🏡 Chore
+
+- Upgrade Nuxt ([b5055be](https://github.com/rezozero/nuxt-layer/commit/b5055be))
+- Update README ([4d079c9](https://github.com/rezozero/nuxt-layer/commit/4d079c9))
+
+### ❤️ Contributors
+
+- Manuel Odelain <manuel@rezo-zero.com>
+- Ambroise Maupate <ambroise@rezo-zero.com>
+
 ## v0.1.4
 
 [compare changes](https://github.com/rezozero/nuxt-layer/compare/v0.1.3...v0.1.4)

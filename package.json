@@ -1,6 +1,6 @@
 {
   "name": "@rezozero/nuxt3-layer",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "scripts": {
     "dev": "nuxi dev playground",
     "build": "nuxi build playground",
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.2.0",
+    "@nuxtjs/i18n": "^8.3.1",
     "@types/node": "^20.11.19",
     "changelogen": "^0.5.5",
     "eslint": "^8.56.0",
