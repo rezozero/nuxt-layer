@@ -3,10 +3,11 @@
 // import type { RoadizNodesSources } from '@roadiz/types'
 
 // Debug useRoadizFetch()
-// const response = await useRoadizFetch<RoadizNodesSources>('/common_content')
+// const { data } = await useRoadizFetch<RoadizNodesSources>('/common_content')
+// const { data: tags } = await useRoadizFetch<RoadizNodesSources>('/tags')
 
 // Debug useRoadizWebResponse()
-// const { webResponse, headers } = await useRoadizWebResponse('/')
+// const { webResponse } = await useRoadizWebResponse()
 
 // Debug getStructuredDataScript()
 // const runtimeConfig = useRuntimeConfig()
