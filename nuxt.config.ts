@@ -13,4 +13,7 @@ export default defineNuxtConfig({
             },
         },
     },
+    optimization: {
+        keyedComposables: [{ name: 'useRoadizFetch', argumentLength: 3 }],
+    },
 })
