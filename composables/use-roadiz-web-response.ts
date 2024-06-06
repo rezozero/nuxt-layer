@@ -4,7 +4,9 @@ import { joinURL } from 'ufo'
 export async function useRoadizWebResponse<T>(path?: string) {
     path = joinURL('/', path || useRoute().path)
 
-    const { data } = await useAsyncData(async () => {
+    const autoKey = `/web_response_by_path--${path}`
+
+    const { data } = await useAsyncData(autoKey, async () => {
         try {
             const fetch = useRoadizFetchFactory()
             const response = await fetch.raw<RoadizWebResponse>('/web_response_by_path', {
